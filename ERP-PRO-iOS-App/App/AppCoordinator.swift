@@ -27,7 +27,7 @@ public enum AppTab: String, CaseIterable, Identifiable, Hashable {
 
     public var iconName: String {
         switch self {
-        case .dashboard: return "chart.bar.fill"
+        case .dashboard: return "house.fill"
         case .invoice: return "doc.text.fill"
         case .payment: return "creditcard.fill"
         case .more: return "ellipsis.circle.fill"

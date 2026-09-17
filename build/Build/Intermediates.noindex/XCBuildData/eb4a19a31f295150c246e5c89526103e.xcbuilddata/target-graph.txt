@@ -1,2 +1,0 @@
-Target dependency graph (1 target)
-Target 'ERP-PRO-iOS-App' in project 'ERP-PRO-iOS-App' (no dependencies)

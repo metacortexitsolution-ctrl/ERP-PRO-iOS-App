@@ -13,66 +13,69 @@ public struct DashboardActivitySection: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.md) {
-            Text(ConstantString.recentActivity)
-                .font(CommonFont.title3)
-                .foregroundColor(CommonColor.primaryText)
+        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
+            HStack {
+                Text(ConstantString.recentActivity)
+                    .font(CommonFont.subheadline)
+                    .bold()
+                    .foregroundColor(CommonColor.primaryText)
+                Spacer()
+                Text("Swipe")
+                    .font(CommonFont.caption2)
+                    .foregroundColor(CommonColor.secondaryText)
+            }
+            .padding(.horizontal, CommonSpacing.xs)
 
             if activities.isEmpty {
                 Text(ConstantString.emptyMessage)
-                    .font(CommonFont.subheadline)
-                    .foregroundColor(CommonColor.secondaryText)
-                    .padding(.vertical, CommonSpacing.md)
-            } else {
-                VStack(spacing: CommonSpacing.sm) {
-                    ForEach(activities) { activity in
-                        ActivityRowView(activity: activity)
-                        if activity.id != activities.last?.id {
-                            Divider()
-                        }
-                    }
-                }
-            }
-        }
-        .padding(CommonSpacing.md)
-        .background(CommonColor.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
-    }
-}
-
-struct ActivityRowView: View {
-    let activity: RecentActivityItem
-
-    var body: some View {
-        HStack(alignment: .top, spacing: CommonSpacing.md) {
-            Image(systemName: iconName(for: activity.category))
-                .font(.body)
-                .foregroundColor(iconColor(for: activity.category))
-                .frame(width: 32, height: 32)
-                .background(iconColor(for: activity.category).opacity(0.12))
-                .clipShape(Circle())
-
-            VStack(alignment: .leading, spacing: 2) {
-                HStack {
-                    Text(activity.title)
-                        .font(CommonFont.subheadline)
-                        .bold()
-                        .foregroundColor(CommonColor.primaryText)
-
-                    Spacer()
-
-                    Text(activity.timestamp)
-                        .font(CommonFont.caption2)
-                        .foregroundColor(CommonColor.secondaryText)
-                }
-
-                Text(activity.detail)
                     .font(CommonFont.caption)
                     .foregroundColor(CommonColor.secondaryText)
+                    .padding(.vertical, CommonSpacing.sm)
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: CommonSpacing.sm) {
+                        ForEach(activities) { activity in
+                            HStack(spacing: CommonSpacing.sm) {
+                                Image(systemName: iconName(for: activity.category))
+                                    .font(.caption)
+                                    .foregroundColor(iconColor(for: activity.category))
+                                    .frame(width: 28, height: 28)
+                                    .background(iconColor(for: activity.category).opacity(0.12))
+                                    .clipShape(Circle())
+
+                                VStack(alignment: .leading, spacing: 2) {
+                                    HStack {
+                                        Text(activity.title)
+                                            .font(CommonFont.caption)
+                                            .bold()
+                                            .foregroundColor(CommonColor.primaryText)
+                                            .lineLimit(1)
+
+                                        Spacer()
+
+                                        Text(activity.timestamp)
+                                            .font(CommonFont.caption2)
+                                            .foregroundColor(CommonColor.secondaryText)
+                                    }
+
+                                    Text(activity.detail)
+                                        .font(CommonFont.caption2)
+                                        .foregroundColor(CommonColor.secondaryText)
+                                        .lineLimit(1)
+                                }
+                            }
+                            .padding(CommonSpacing.sm)
+                            .frame(width: 210, alignment: .leading)
+                            .background(CommonColor.cardBackground)
+                            .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
+                            .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
+                        }
+                    }
+                    .padding(.horizontal, 2)
+                    .padding(.vertical, 2)
+                }
             }
         }
-        .padding(.vertical, CommonSpacing.xs)
     }
 
     private func iconName(for category: String) -> String {

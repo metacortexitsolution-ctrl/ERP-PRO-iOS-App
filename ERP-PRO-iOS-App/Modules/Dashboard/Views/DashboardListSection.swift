@@ -30,23 +30,23 @@ public struct DashboardListSection: View {
     }
 
     public var body: some View {
-        VStack(spacing: CommonSpacing.lg) {
+        VStack(spacing: CommonSpacing.md) {
             // 1. Orders Pipeline
             if let pipeline = pipeline {
                 OrdersPipelineView(pipeline: pipeline)
             }
 
-            // 2. Top Customers
-            if let customers = topCustomers, !customers.isEmpty {
-                TopCustomersListView(customers: customers)
-            }
-
-            // 3. Pending Approvals
+            // 2. Pending Approvals (Horizontal Cards)
             if let approvals = pendingApprovals, !approvals.isEmpty {
-                PendingApprovalsListView(approvals: approvals)
+                PendingApprovalsHorizontalView(approvals: approvals)
             }
 
-            // 4. Dealer Performance
+            // 3. Top Customers (Horizontal Cards)
+            if let customers = topCustomers, !customers.isEmpty {
+                TopCustomersHorizontalView(customers: customers)
+            }
+
+            // 4. Dealer Performance (Horizontal Scroll Table)
             if let performance = dealerPerformance, !performance.isEmpty {
                 DealerPerformanceTableView(items: performance)
             }
@@ -56,7 +56,7 @@ public struct DashboardListSection: View {
                 SupportTicketSummaryView(summary: tickets)
             }
 
-            // 6. Low Stock Table
+            // 6. Low Stock Table (Horizontal Scroll Table)
             if let lowStock = lowStockItems, !lowStock.isEmpty {
                 LowStockTableView(items: lowStock)
             }
@@ -70,9 +70,10 @@ struct OrdersPipelineView: View {
     let pipeline: OrdersPipelineSummary
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.md) {
+        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
             Text(ConstantString.ordersPipeline)
-                .font(CommonFont.title3)
+                .font(CommonFont.subheadline)
+                .bold()
                 .foregroundColor(CommonColor.primaryText)
 
             HStack(spacing: CommonSpacing.xs) {
@@ -96,7 +97,7 @@ struct PipelineStageBadge: View {
     let color: Color
 
     var body: some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 2) {
             Text("\(count)")
                 .font(CommonFont.subheadline)
                 .bold()
@@ -106,51 +107,63 @@ struct PipelineStageBadge: View {
                 .font(CommonFont.caption2)
                 .foregroundColor(CommonColor.secondaryText)
                 .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.7)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, CommonSpacing.sm)
+        .padding(.vertical, CommonSpacing.xs)
         .background(color.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusSm))
     }
 }
 
-// MARK: - 2. Top Customers List
+// MARK: - 2. Top Customers Horizontal Scroll Cards
 
-struct TopCustomersListView: View {
+struct TopCustomersHorizontalView: View {
     let customers: [TopCustomer]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.md) {
-            Text(ConstantString.topCustomers)
-                .font(CommonFont.title3)
-                .foregroundColor(CommonColor.primaryText)
+        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
+            HStack {
+                Text(ConstantString.topCustomers)
+                    .font(CommonFont.subheadline)
+                    .bold()
+                    .foregroundColor(CommonColor.primaryText)
+                Spacer()
+                Text("Swipe")
+                    .font(CommonFont.caption2)
+                    .foregroundColor(CommonColor.secondaryText)
+            }
+            .padding(.horizontal, CommonSpacing.xs)
 
-            VStack(spacing: CommonSpacing.sm) {
-                ForEach(customers) { customer in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(customer.name)
-                                .font(CommonFont.subheadline)
-                                .bold()
-                                .foregroundColor(CommonColor.primaryText)
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: CommonSpacing.sm) {
+                    ForEach(customers) { customer in
+                        VStack(alignment: .leading, spacing: CommonSpacing.xs) {
+                            HStack {
+                                Text(customer.name)
+                                    .font(CommonFont.subheadline)
+                                    .bold()
+                                    .foregroundColor(CommonColor.primaryText)
+                                    .lineLimit(1)
+                                Spacer()
+                                HealthBadge(status: customer.paymentHealth)
+                            }
+
                             Text(CommonCurrencyFormatter.format(customer.revenue))
-                                .font(CommonFont.caption)
-                                .foregroundColor(CommonColor.secondaryText)
+                                .font(CommonFont.kpiSubValue)
+                                .foregroundColor(CommonColor.primary)
                         }
-                        Spacer()
-                        HealthBadge(status: customer.paymentHealth)
-                    }
-                    if customer.id != customers.last?.id {
-                        Divider()
+                        .padding(CommonSpacing.sm)
+                        .frame(width: 170, alignment: .leading)
+                        .background(CommonColor.cardBackground)
+                        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
+                        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
                     }
                 }
+                .padding(.horizontal, 2)
+                .padding(.vertical, 2)
             }
         }
-        .padding(CommonSpacing.md)
-        .background(CommonColor.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
     }
 }
 
@@ -161,8 +174,8 @@ struct HealthBadge: View {
         Text(status)
             .font(CommonFont.caption2)
             .bold()
-            .padding(.horizontal, CommonSpacing.sm)
-            .padding(.vertical, 4)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
             .foregroundColor(badgeColor)
             .background(badgeColor.opacity(0.12))
             .clipShape(Capsule())
@@ -178,45 +191,68 @@ struct HealthBadge: View {
     }
 }
 
-// MARK: - 3. Pending Approvals List
+// MARK: - 3. Pending Approvals Horizontal Scroll Cards
 
-struct PendingApprovalsListView: View {
+struct PendingApprovalsHorizontalView: View {
     let approvals: [PendingApproval]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.md) {
-            Text(ConstantString.pendingApprovals)
-                .font(CommonFont.title3)
-                .foregroundColor(CommonColor.primaryText)
+        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
+            HStack {
+                Text(ConstantString.pendingApprovals)
+                    .font(CommonFont.subheadline)
+                    .bold()
+                    .foregroundColor(CommonColor.primaryText)
+                Spacer()
+                Text("\(approvals.count) pending")
+                    .font(CommonFont.caption2)
+                    .foregroundColor(CommonColor.warning)
+            }
+            .padding(.horizontal, CommonSpacing.xs)
 
-            VStack(spacing: CommonSpacing.sm) {
-                ForEach(approvals) { item in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: CommonSpacing.sm) {
+                    ForEach(approvals) { item in
+                        VStack(alignment: .leading, spacing: CommonSpacing.xs) {
+                            HStack {
+                                Text(item.type)
+                                    .font(CommonFont.caption2)
+                                    .bold()
+                                    .foregroundColor(CommonColor.warning)
+                                Spacer()
+                                Text(item.date)
+                                    .font(CommonFont.caption2)
+                                    .foregroundColor(CommonColor.secondaryText)
+                            }
+
                             Text(item.title)
                                 .font(CommonFont.subheadline)
                                 .bold()
                                 .foregroundColor(CommonColor.primaryText)
-                            Text("\(item.type) • \(item.requestedBy) • \(item.date)")
-                                .font(CommonFont.caption)
-                                .foregroundColor(CommonColor.secondaryText)
+                                .lineLimit(1)
+
+                            HStack {
+                                Text(item.requestedBy)
+                                    .font(CommonFont.caption)
+                                    .foregroundColor(CommonColor.secondaryText)
+                                Spacer()
+                                Text(CommonCurrencyFormatter.format(item.amount))
+                                    .font(CommonFont.subheadline)
+                                    .bold()
+                                    .foregroundColor(CommonColor.primaryText)
+                            }
                         }
-                        Spacer()
-                        Text(CommonCurrencyFormatter.format(item.amount))
-                            .font(CommonFont.subheadline)
-                            .bold()
-                            .foregroundColor(CommonColor.primaryText)
-                    }
-                    if item.id != approvals.last?.id {
-                        Divider()
+                        .padding(CommonSpacing.sm)
+                        .frame(width: 220, alignment: .leading)
+                        .background(CommonColor.cardBackground)
+                        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
+                        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
                     }
                 }
+                .padding(.horizontal, 2)
+                .padding(.vertical, 2)
             }
         }
-        .padding(CommonSpacing.md)
-        .background(CommonColor.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
     }
 }
 
@@ -226,21 +262,22 @@ struct DealerPerformanceTableView: View {
     let items: [DealerPerformanceItem]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.md) {
+        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
             Text(ConstantString.dealerPerformance)
-                .font(CommonFont.title3)
+                .font(CommonFont.subheadline)
+                .bold()
                 .foregroundColor(CommonColor.primaryText)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: CommonSpacing.xs) {
                     HStack {
-                        Text(ConstantString.region).frame(width: 100, alignment: .leading)
-                        Text(ConstantString.mtdOrders).frame(width: 80, alignment: .trailing)
-                        Text(ConstantString.sales).frame(width: 100, alignment: .trailing)
-                        Text(ConstantString.targetAchievement).frame(width: 80, alignment: .trailing)
-                        Text(ConstantString.commissionDue).frame(width: 100, alignment: .trailing)
+                        Text(ConstantString.region).frame(width: 80, alignment: .leading)
+                        Text(ConstantString.mtdOrders).frame(width: 70, alignment: .trailing)
+                        Text(ConstantString.sales).frame(width: 90, alignment: .trailing)
+                        Text(ConstantString.targetAchievement).frame(width: 70, alignment: .trailing)
+                        Text(ConstantString.commissionDue).frame(width: 90, alignment: .trailing)
                     }
-                    .font(CommonFont.caption)
+                    .font(CommonFont.caption2)
                     .bold()
                     .foregroundColor(CommonColor.secondaryText)
 
@@ -248,14 +285,14 @@ struct DealerPerformanceTableView: View {
 
                     ForEach(items) { item in
                         HStack {
-                            Text(item.region).frame(width: 100, alignment: .leading)
-                            Text("\(item.mtdOrders)").frame(width: 80, alignment: .trailing)
-                            Text(CommonCurrencyFormatter.format(item.sales)).frame(width: 100, alignment: .trailing)
-                            Text(String(format: "%.0f%%", item.targetAchievementPercentage)).frame(width: 80, alignment: .trailing)
-                            Text(CommonCurrencyFormatter.format(item.commissionDue)).frame(width: 100, alignment: .trailing)
+                            Text(item.region).frame(width: 80, alignment: .leading)
+                            Text("\(item.mtdOrders)").frame(width: 70, alignment: .trailing)
+                            Text(CommonCurrencyFormatter.format(item.sales)).frame(width: 90, alignment: .trailing)
+                            Text(String(format: "%.0f%%", item.targetAchievementPercentage)).frame(width: 70, alignment: .trailing)
+                            Text(CommonCurrencyFormatter.format(item.commissionDue)).frame(width: 90, alignment: .trailing)
                         }
                         .font(CommonFont.caption)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 2)
                     }
                 }
             }
@@ -273,26 +310,21 @@ struct SupportTicketSummaryView: View {
     let summary: SupportTicketSummary
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.md) {
-            Text(ConstantString.supportTicketSummary)
-                .font(CommonFont.title3)
-                .foregroundColor(CommonColor.primaryText)
+        HStack {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(ConstantString.supportTicketSummary)
+                    .font(CommonFont.subheadline)
+                    .bold()
+                    .foregroundColor(CommonColor.primaryText)
 
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("\(summary.openTicketsCount) Open Tickets")
-                        .font(CommonFont.subheadline)
-                        .bold()
-                        .foregroundColor(CommonColor.primaryText)
-                    Text("Priority: \(summary.priority)")
-                        .font(CommonFont.caption)
-                        .foregroundColor(CommonColor.secondaryText)
-                }
-
-                Spacer()
-
-                SLABadge(status: summary.slaStatus)
+                Text("\(summary.openTicketsCount) Open Tickets • Priority: \(summary.priority)")
+                    .font(CommonFont.caption)
+                    .foregroundColor(CommonColor.secondaryText)
             }
+
+            Spacer()
+
+            SLABadge(status: summary.slaStatus)
         }
         .padding(CommonSpacing.md)
         .background(CommonColor.cardBackground)
@@ -331,22 +363,31 @@ struct LowStockTableView: View {
     let items: [LowStockItem]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.md) {
-            Text(ConstantString.lowStockTable)
-                .font(CommonFont.title3)
-                .foregroundColor(CommonColor.primaryText)
+        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
+            HStack {
+                Text(ConstantString.lowStockTable)
+                    .font(CommonFont.subheadline)
+                    .bold()
+                    .foregroundColor(CommonColor.primaryText)
+
+                Spacer()
+
+                Text("\(items.count) items")
+                    .font(CommonFont.caption2)
+                    .foregroundColor(CommonColor.danger)
+            }
 
             ScrollView(.horizontal, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: CommonSpacing.xs) {
                     HStack {
-                        Text(ConstantString.sku).frame(width: 80, alignment: .leading)
+                        Text(ConstantString.sku).frame(width: 90, alignment: .leading)
                         Text(ConstantString.productName).frame(width: 140, alignment: .leading)
-                        Text(ConstantString.category).frame(width: 100, alignment: .leading)
-                        Text(ConstantString.stockLevel).frame(width: 80, alignment: .trailing)
-                        Text(ConstantString.reorderLevel).frame(width: 90, alignment: .trailing)
-                        Text(ConstantString.warehouse).frame(width: 100, alignment: .leading)
+                        Text(ConstantString.category).frame(width: 90, alignment: .leading)
+                        Text(ConstantString.stockLevel).frame(width: 70, alignment: .trailing)
+                        Text(ConstantString.reorderLevel).frame(width: 80, alignment: .trailing)
+                        Text(ConstantString.warehouse).frame(width: 90, alignment: .leading)
                     }
-                    .font(CommonFont.caption)
+                    .font(CommonFont.caption2)
                     .bold()
                     .foregroundColor(CommonColor.secondaryText)
 
@@ -354,18 +395,18 @@ struct LowStockTableView: View {
 
                     ForEach(items) { item in
                         HStack {
-                            Text(item.sku).frame(width: 80, alignment: .leading)
+                            Text(item.sku).frame(width: 90, alignment: .leading)
                             Text(item.productName).frame(width: 140, alignment: .leading)
-                            Text(item.category).frame(width: 100, alignment: .leading)
+                            Text(item.category).frame(width: 90, alignment: .leading)
                             Text("\(item.stockLevel)")
                                 .bold()
                                 .foregroundColor(CommonColor.danger)
-                                .frame(width: 80, alignment: .trailing)
-                            Text("\(item.reorderLevel)").frame(width: 90, alignment: .trailing)
-                            Text(item.warehouse).frame(width: 100, alignment: .leading)
+                                .frame(width: 70, alignment: .trailing)
+                            Text("\(item.reorderLevel)").frame(width: 80, alignment: .trailing)
+                            Text(item.warehouse).frame(width: 90, alignment: .leading)
                         }
                         .font(CommonFont.caption)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 2)
                     }
                 }
             }

@@ -7,7 +7,8 @@ import Foundation
 
 public struct ConstantString {
     // MARK: - Navigation Tabs
-    public static let dashboard = "Dashboard"
+    public static let dashboard = "Home"
+    public static let home = "Home"
     public static let invoice = "Invoice"
     public static let payment = "Payment"
     public static let more = "More"
@@ -107,10 +108,10 @@ public struct ConstantString {
     public static let commissionDue = "Commission Due"
     
     // MARK: - UI States & Common Buttons
-    public static let loadingDashboard = "Loading Dashboard..."
-    public static let emptyTitle = "No Dashboard Data"
+    public static let loadingDashboard = "Loading Home..."
+    public static let emptyTitle = "No Home Data"
     public static let emptyMessage = "No data is currently available for your account."
-    public static let errorTitle = "Unable to Load Dashboard"
+    public static let errorTitle = "Unable to Load Home"
     public static let retry = "Retry"
     public static let refresh = "Refresh"
     public static let lastUpdated = "Last updated"
@@ -120,4 +121,12 @@ public struct ConstantString {
     public static let paymentModulePlaceholder = "Payment Module Navigation Stack"
     public static let settingsModulePlaceholder = "Settings Module Navigation Stack"
     public static let moreModulesTitle = "ERP Modules"
+    
+    // MARK: - Header Profile & Company Menus
+    public static let myProfile = "My Profile"
+    public static let notificationPreferences = "Notification Preferences"
+    public static let theme = "Theme"
+    public static let systemSettings = "System Settings"
+    public static let logOut = "Log Out"
+    public static let switchCompany = "Switch Company"
 }

@@ -5,19 +5,102 @@
 
 import SwiftUI
 import Charts
+import Combine
+
+public final class DashboardChartViewState: ObservableObject {
+    @Published public var salesMode: DashboardChartSection.SalesChartMode = .monthlySales
+    @Published public var paymentMode: DashboardChartSection.PaymentChartMode = .collection
+    @Published public var inventoryMode: DashboardChartSection.InventoryChartMode = .stockTrend
+    public init() {}
+}
 
 public struct DashboardChartSection: View {
     let chartsData: DashboardChartsData
+    @StateObject private var chartState = DashboardChartViewState()
 
     public init(chartsData: DashboardChartsData) {
         self.chartsData = chartsData
     }
 
+    public enum SalesChartMode: String, CaseIterable, Identifiable {
+        case monthlySales = "Monthly Sales"
+        case revenueTrend = "Revenue Trend"
+        public var id: String { rawValue }
+    }
+
+    public enum PaymentChartMode: String, CaseIterable, Identifiable {
+        case collection = "Payment Collection"
+        case arAging = "AR Aging Breakdown"
+        public var id: String { rawValue }
+    }
+
+    public enum InventoryChartMode: String, CaseIterable, Identifiable {
+        case stockTrend = "Stock Trend"
+        case dealerActivity = "Dealer Activity"
+        case cashFlow = "Cash Flow Forecast"
+        public var id: String { rawValue }
+    }
+
     public var body: some View {
-        VStack(spacing: CommonSpacing.lg) {
-            // 1. Monthly Sales Chart
-            if let monthlySales = chartsData.monthlySales, !monthlySales.isEmpty {
-                ChartContainerView(title: ConstantString.monthlySalesChart) {
+        VStack(alignment: .leading, spacing: CommonSpacing.xs) {
+            HStack {
+                Text("Analytics & Charts")
+                    .font(CommonFont.title3)
+                    .foregroundColor(CommonColor.primaryText)
+                Spacer()
+                Text("Swipe / Long-press for options")
+                    .font(CommonFont.caption2)
+                    .foregroundColor(CommonColor.secondaryText)
+            }
+            .padding(.horizontal, CommonSpacing.xs)
+
+            TabView {
+                // Card 1: Sales Analytics
+                SalesChartCard(chartsData: chartsData, mode: $chartState.salesMode)
+                    .padding(.horizontal, 2)
+
+                // Card 2: Payment & AR Aging Analytics
+                PaymentChartCard(chartsData: chartsData, mode: $chartState.paymentMode)
+                    .padding(.horizontal, 2)
+
+                // Card 3: Inventory & Cash Flow Analytics
+                InventoryChartCard(chartsData: chartsData, mode: $chartState.inventoryMode)
+                    .padding(.horizontal, 2)
+            }
+            .tabViewStyle(.page(indexDisplayMode: .always))
+            .frame(height: 290)
+        }
+    }
+}
+
+// MARK: - Card 1: Sales Analytics Card
+
+struct SalesChartCard: View {
+    let chartsData: DashboardChartsData
+    @Binding var mode: DashboardChartSection.SalesChartMode
+
+    var body: some View {
+        ChartCardContainer(
+            title: mode.rawValue,
+            subtitle: "Sales & Revenue",
+            menuContent: {
+                ForEach(DashboardChartSection.SalesChartMode.allCases) { item in
+                    Button {
+                        mode = item
+                    } label: {
+                        HStack {
+                            Text(item.rawValue)
+                            if mode == item {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                }
+            }
+        ) {
+            switch mode {
+            case .monthlySales:
+                if let monthlySales = chartsData.monthlySales, !monthlySales.isEmpty {
                     Chart(monthlySales) { item in
                         BarMark(
                             x: .value("Month", item.month),
@@ -29,13 +112,12 @@ public struct DashboardChartSection: View {
                     .chartYAxis {
                         AxisMarks(position: .leading)
                     }
-                    .frame(height: 200)
+                    .frame(height: 180)
+                } else {
+                    EmptyChartView()
                 }
-            }
-
-            // 2. Revenue Trend (This Year vs Last Year)
-            if let revenueTrend = chartsData.revenueTrend, !revenueTrend.isEmpty {
-                ChartContainerView(title: ConstantString.revenueTrend) {
+            case .revenueTrend:
+                if let revenueTrend = chartsData.revenueTrend, !revenueTrend.isEmpty {
                     Chart {
                         ForEach(revenueTrend) { item in
                             LineMark(
@@ -54,22 +136,97 @@ public struct DashboardChartSection: View {
                         }
                     }
                     .chartLegend(position: .top, alignment: .trailing)
-                    .frame(height: 200)
+                    .frame(height: 180)
+                } else {
+                    EmptyChartView()
                 }
             }
+        }
+    }
+}
 
-            // 3. Payment Collection Gauge / Breakdown
-            if let collection = chartsData.paymentCollection {
-                ChartContainerView(title: ConstantString.paymentCollection) {
-                    VStack(spacing: CommonSpacing.md) {
-                        PaymentCollectionGaugeView(collection: collection)
+// MARK: - Card 2: Payment & AR Aging Analytics Card
+
+struct PaymentChartCard: View {
+    let chartsData: DashboardChartsData
+    @Binding var mode: DashboardChartSection.PaymentChartMode
+
+    var body: some View {
+        ChartCardContainer(
+            title: mode.rawValue,
+            subtitle: "Payment Health & Collections",
+            menuContent: {
+                ForEach(DashboardChartSection.PaymentChartMode.allCases) { item in
+                    Button {
+                        mode = item
+                    } label: {
+                        HStack {
+                            Text(item.rawValue)
+                            if mode == item {
+                                Image(systemName: "checkmark")
+                            }
+                        }
                     }
                 }
             }
+        ) {
+            switch mode {
+            case .collection:
+                if let collection = chartsData.paymentCollection {
+                    VStack(spacing: CommonSpacing.md) {
+                        PaymentCollectionGaugeView(collection: collection)
+                    }
+                    .frame(height: 180)
+                } else {
+                    EmptyChartView()
+                }
+            case .arAging:
+                if let arAging = chartsData.arAging, !arAging.isEmpty {
+                    Chart(arAging) { item in
+                        BarMark(
+                            x: .value("Period", item.period),
+                            y: .value("Amount", item.amount)
+                        )
+                        .foregroundStyle(by: .value("Period", item.period))
+                    }
+                    .chartLegend(.hidden)
+                    .frame(height: 180)
+                } else {
+                    EmptyChartView()
+                }
+            }
+        }
+    }
+}
 
-            // 4. Inventory Trend (30-day stock progression)
-            if let inventoryTrend = chartsData.inventoryTrend, !inventoryTrend.isEmpty {
-                ChartContainerView(title: ConstantString.inventoryTrend) {
+// MARK: - Card 3: Inventory & Cash Flow Card
+
+struct InventoryChartCard: View {
+    let chartsData: DashboardChartsData
+    @Binding var mode: DashboardChartSection.InventoryChartMode
+
+    var body: some View {
+        ChartCardContainer(
+            title: mode.rawValue,
+            subtitle: "Stock & Cash Operations",
+            menuContent: {
+                ForEach(DashboardChartSection.InventoryChartMode.allCases) { item in
+                    Button {
+                        mode = item
+                    } label: {
+                        HStack {
+                            Text(item.rawValue)
+                            if mode == item {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                }
+            }
+        ) {
+            switch mode {
+            case .stockTrend:
+                if let inventoryTrend = chartsData.inventoryTrend, !inventoryTrend.isEmpty {
                     Chart(inventoryTrend) { item in
                         LineMark(
                             x: .value("Date", item.date),
@@ -84,12 +241,11 @@ public struct DashboardChartSection: View {
                         .foregroundStyle(CommonColor.chartQuaternary.opacity(0.1))
                     }
                     .frame(height: 180)
+                } else {
+                    EmptyChartView()
                 }
-            }
-
-            // 5. Dealer Activity (Order volume & value)
-            if let dealerActivity = chartsData.dealerActivity, !dealerActivity.isEmpty {
-                ChartContainerView(title: ConstantString.dealerActivity) {
+            case .dealerActivity:
+                if let dealerActivity = chartsData.dealerActivity, !dealerActivity.isEmpty {
                     Chart(dealerActivity) { item in
                         BarMark(
                             x: .value("Dealer", item.dealerName),
@@ -97,28 +253,12 @@ public struct DashboardChartSection: View {
                         )
                         .foregroundStyle(CommonColor.chartTertiary.gradient)
                     }
-                    .frame(height: 200)
+                    .frame(height: 180)
+                } else {
+                    EmptyChartView()
                 }
-            }
-
-            // 6. AR Aging (Current, 1-30, 31-60, 61-90, 90+ days)
-            if let arAging = chartsData.arAging, !arAging.isEmpty {
-                ChartContainerView(title: ConstantString.arAging) {
-                    Chart(arAging) { item in
-                        BarMark(
-                            x: .value("Period", item.period),
-                            y: .value("Amount", item.amount)
-                        )
-                        .foregroundStyle(by: .value("Period", item.period))
-                    }
-                    .chartLegend(.hidden)
-                    .frame(height: 200)
-                }
-            }
-
-            // 7. Cash Flow Forecast (Inflows, Outflows, Net Cash Flow)
-            if let cashFlow = chartsData.cashFlowForecast, !cashFlow.isEmpty {
-                ChartContainerView(title: ConstantString.cashFlowForecast) {
+            case .cashFlow:
+                if let cashFlow = chartsData.cashFlowForecast, !cashFlow.isEmpty {
                     Chart {
                         ForEach(cashFlow) { item in
                             BarMark(
@@ -140,24 +280,47 @@ public struct DashboardChartSection: View {
                             .foregroundStyle(CommonColor.primary)
                         }
                     }
-                    .frame(height: 220)
+                    .frame(height: 180)
+                } else {
+                    EmptyChartView()
                 }
             }
         }
     }
 }
 
-// MARK: - Reusable Chart Wrapper
+// MARK: - Reusable Chart Card Shell with Context Menu
 
-struct ChartContainerView<Content: View>: View {
+struct ChartCardContainer<MenuContent: View, Content: View>: View {
     let title: String
+    let subtitle: String
+    @ViewBuilder let menuContent: () -> MenuContent
     @ViewBuilder let content: () -> Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.md) {
-            Text(title)
-                .font(CommonFont.title3)
-                .foregroundColor(CommonColor.primaryText)
+        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(CommonFont.subheadline)
+                        .bold()
+                        .foregroundColor(CommonColor.primaryText)
+                    Text(subtitle)
+                        .font(CommonFont.caption2)
+                        .foregroundColor(CommonColor.secondaryText)
+                }
+
+                Spacer()
+
+                Menu {
+                    menuContent()
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .font(.body)
+                        .foregroundColor(CommonColor.primary)
+                        .padding(CommonSpacing.xs)
+                }
+            }
 
             content()
         }
@@ -165,6 +328,20 @@ struct ChartContainerView<Content: View>: View {
         .background(CommonColor.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
         .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
+        .contextMenu {
+            menuContent()
+        }
+    }
+}
+
+struct EmptyChartView: View {
+    var body: some View {
+        VStack {
+            Text(ConstantString.emptyMessage)
+                .font(CommonFont.caption)
+                .foregroundColor(CommonColor.secondaryText)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

@@ -14,10 +14,17 @@ public struct DashboardAlertSection: View {
 
     public var body: some View {
         if !alerts.isEmpty {
-            VStack(spacing: CommonSpacing.sm) {
-                ForEach(alerts) { alert in
-                    AlertBannerRow(alert: alert)
+            if alerts.count == 1 {
+                AlertBannerRow(alert: alerts[0])
+            } else {
+                TabView {
+                    ForEach(alerts) { alert in
+                        AlertBannerRow(alert: alert)
+                            .padding(.horizontal, 2)
+                    }
                 }
+                .tabViewStyle(.page(indexDisplayMode: .always))
+                .frame(height: 95)
             }
         }
     }
