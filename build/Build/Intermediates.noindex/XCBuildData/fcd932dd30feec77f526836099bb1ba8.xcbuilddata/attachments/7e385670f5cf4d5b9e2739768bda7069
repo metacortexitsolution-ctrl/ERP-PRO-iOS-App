@@ -1,0 +1,369 @@
+{
+  "" : {
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP-PRO-iOS-App-primary.dia",
+    "emit-module-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP-PRO-iOS-App-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP-PRO-iOS-App-primary-emit-module.dia",
+    "pch" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP-PRO-iOS-App-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP-PRO-iOS-App-primary.swiftdeps"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/App/AppCoordinator.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppCoordinator.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppCoordinator.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppCoordinator.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppCoordinator.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppCoordinator.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppCoordinator.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppCoordinator.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppCoordinator~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/App/AppDelegate.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppDelegate.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppDelegate.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppDelegate.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppDelegate.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppDelegate.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppDelegate.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppDelegate.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppDelegate~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/App/ERPProApp.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERPProApp.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERPProApp.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERPProApp.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERPProApp.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERPProApp.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERPProApp.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERPProApp.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERPProApp~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/ContentView.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/AppAlert.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppAlert.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppAlert.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppAlert.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppAlert.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppAlert.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppAlert.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppAlert.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppAlert~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonColor.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonColor.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonColor.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonColor.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonColor.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonColor.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonColor.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonColor.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonColor~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonCurrencyFormatter.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonCurrencyFormatter.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonCurrencyFormatter.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonCurrencyFormatter.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonCurrencyFormatter.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonCurrencyFormatter.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonCurrencyFormatter.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonCurrencyFormatter.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonCurrencyFormatter~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonDateFormatter.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonFont.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonMethod.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonSpacing.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonSpacing.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonSpacing.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonSpacing.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonSpacing.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonSpacing.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonSpacing.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonSpacing.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonSpacing~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonValidation.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonValidation.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonValidation.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonValidation.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonValidation.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonValidation.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonValidation.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonValidation.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonValidation~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/DeviceInfo.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DeviceInfo.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DeviceInfo.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DeviceInfo.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DeviceInfo.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DeviceInfo.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DeviceInfo.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DeviceInfo.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DeviceInfo~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Constants/APIConstant.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIConstant.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIConstant.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIConstant.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIConstant.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIConstant.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIConstant.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIConstant.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIConstant~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Constants/AppConstant.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppConstant.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppConstant.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppConstant.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppConstant.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppConstant.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppConstant.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppConstant.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppConstant~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Constants/ConstantString.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ConstantString.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ConstantString.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ConstantString.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ConstantString.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ConstantString.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ConstantString.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ConstantString.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ConstantString~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Constants/StorageKey.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/StorageKey.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/StorageKey.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/StorageKey.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/StorageKey.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/StorageKey.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/StorageKey.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/StorageKey.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/StorageKey~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Constants/ValidationConstant.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ValidationConstant.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ValidationConstant.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ValidationConstant.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ValidationConstant.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ValidationConstant.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ValidationConstant.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ValidationConstant.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ValidationConstant~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Extensions/CommonExtension.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonExtension.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonExtension.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonExtension.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonExtension.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonExtension.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonExtension.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonExtension.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonExtension~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Navigation/AppRoute.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppRoute.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppRoute.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppRoute.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppRoute.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppRoute.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppRoute.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppRoute.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/AppRoute~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Networking/APIManager.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIManager.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIManager.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIManager.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIManager.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIManager.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIManager.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIManager.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIManager~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Networking/APIRequest.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIRequest.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIRequest.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIRequest.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIRequest.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIRequest.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIRequest.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIRequest.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/APIRequest~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/ERP_PRO_iOS_AppApp.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_AppApp.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_AppApp.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_AppApp.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_AppApp.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_AppApp.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_AppApp.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_AppApp.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_AppApp~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Modules/Dashboard/Controllers/DashboardController.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardController.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardController.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardController.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardController.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardController.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardController.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardController.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardController~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Modules/Dashboard/Models/DashboardModel.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardModel.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardModel.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardModel.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardModel.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardModel.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardModel.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardModel.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardModel~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Modules/Dashboard/Views/DashboardActivitySection.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardActivitySection.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardActivitySection.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardActivitySection.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardActivitySection.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardActivitySection.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardActivitySection.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardActivitySection.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardActivitySection~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Modules/Dashboard/Views/DashboardAlertSection.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardAlertSection.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardAlertSection.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardAlertSection.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardAlertSection.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardAlertSection.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardAlertSection.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardAlertSection.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardAlertSection~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Modules/Dashboard/Views/DashboardChartSection.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardChartSection.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardChartSection.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardChartSection.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardChartSection.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardChartSection.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardChartSection.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardChartSection.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardChartSection~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Modules/Dashboard/Views/DashboardKPICard.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardKPICard.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardKPICard.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardKPICard.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardKPICard.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardKPICard.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardKPICard.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardKPICard.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardKPICard~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Modules/Dashboard/Views/DashboardListSection.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardListSection.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardListSection.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardListSection.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardListSection.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardListSection.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardListSection.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardListSection.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardListSection~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Modules/Dashboard/Views/DashboardView.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardView.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardView.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardView.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardView.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardView.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardView.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardView.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/DashboardView~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Persistence.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Persistence.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Persistence.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Persistence.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Persistence.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Persistence.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Persistence.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Persistence.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Persistence~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/DerivedSources/CoreDataGenerated/ERP_PRO_iOS_App/ERP_PRO_iOS_App+CoreDataModel.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_App+CoreDataModel.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_App+CoreDataModel.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_App+CoreDataModel.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_App+CoreDataModel.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_App+CoreDataModel.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_App+CoreDataModel.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_App+CoreDataModel.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/ERP_PRO_iOS_App+CoreDataModel~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/DerivedSources/CoreDataGenerated/ERP_PRO_iOS_App/Item+CoreDataClass.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataClass.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataClass.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataClass.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataClass.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataClass.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataClass.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataClass.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataClass~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/DerivedSources/CoreDataGenerated/ERP_PRO_iOS_App/Item+CoreDataProperties.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataProperties.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataProperties.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataProperties.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataProperties.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataProperties.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataProperties.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataProperties.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/Item+CoreDataProperties~partial.swiftmodule"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

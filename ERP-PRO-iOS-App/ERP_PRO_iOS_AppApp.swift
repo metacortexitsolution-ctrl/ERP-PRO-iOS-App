@@ -2,8 +2,6 @@
 //  ERP_PRO_iOS_AppApp.swift
 //  ERP-PRO-iOS-App
 //
-//  Created by Dhairya Patel on 17/09/26.
-//
 
 import SwiftUI
 import CoreData
@@ -14,7 +12,7 @@ struct ERP_PRO_iOS_AppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppCoordinatorView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

@@ -1,0 +1,23 @@
+{
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonDateFormatter.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.dia",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonDateFormatter.swiftdeps"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonFont.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.dia",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonFont.swiftdeps"
+  },
+  "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/ERP-PRO-iOS-App/Core/Common/CommonMethod.swift" : {
+    "const-values" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.swiftconstvalues",
+    "dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.d",
+    "diagnostics" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.dia",
+    "object" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.o",
+    "swift-dependencies" : "/Users/dhairyapatel/Documents/MetaCoreProject/ERP-PRO-iOS-App/build/Build/Intermediates.noindex/ERP-PRO-iOS-App.build/Debug-iphonesimulator/ERP-PRO-iOS-App.build/Objects-normal/arm64/CommonMethod.swiftdeps"
+  }
+}
