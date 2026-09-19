@@ -6,414 +6,520 @@
 import SwiftUI
 
 public struct DashboardListSection: View {
+    let performanceMetrics: [PerformanceMetricRow]?
     let pipeline: OrdersPipelineSummary?
-    let topCustomers: [TopCustomer]?
+    let paymentCollection: PaymentCollectionSummary?
     let pendingApprovals: [PendingApproval]?
+    let topCustomers: [TopCustomer]?
     let dealerPerformance: [DealerPerformanceItem]?
-    let supportTicketSummary: SupportTicketSummary?
-    let lowStockItems: [LowStockItem]?
 
     public init(
+        performanceMetrics: [PerformanceMetricRow]? = nil,
         pipeline: OrdersPipelineSummary?,
-        topCustomers: [TopCustomer]?,
+        paymentCollection: PaymentCollectionSummary? = nil,
         pendingApprovals: [PendingApproval]?,
-        dealerPerformance: [DealerPerformanceItem]?,
-        supportTicketSummary: SupportTicketSummary?,
-        lowStockItems: [LowStockItem]?
+        topCustomers: [TopCustomer]?,
+        dealerPerformance: [DealerPerformanceItem]?
     ) {
+        self.performanceMetrics = performanceMetrics
         self.pipeline = pipeline
-        self.topCustomers = topCustomers
+        self.paymentCollection = paymentCollection
         self.pendingApprovals = pendingApprovals
+        self.topCustomers = topCustomers
         self.dealerPerformance = dealerPerformance
-        self.supportTicketSummary = supportTicketSummary
-        self.lowStockItems = lowStockItems
     }
 
     public var body: some View {
-        VStack(spacing: CommonSpacing.md) {
-            // 1. Orders Pipeline
+        VStack(spacing: 16) {
+            // 1. Performance Section
+            if let metrics = performanceMetrics, !metrics.isEmpty {
+                PerformanceSectionView(metrics: metrics)
+            }
+
+            // 2. Sales Orders Pipeline
             if let pipeline = pipeline {
-                OrdersPipelineView(pipeline: pipeline)
+                SalesOrdersPipelineView(pipeline: pipeline)
             }
 
-            // 2. Pending Approvals (Horizontal Cards)
+            // 3. Payment Collection
+            if let payment = paymentCollection {
+                PaymentCollectionView(payment: payment)
+            }
+
+            // 4. Pending Approvals
             if let approvals = pendingApprovals, !approvals.isEmpty {
-                PendingApprovalsHorizontalView(approvals: approvals)
+                PendingApprovalsListView(approvals: approvals)
             }
 
-            // 3. Top Customers (Horizontal Cards)
+            // 5. Top Customers
             if let customers = topCustomers, !customers.isEmpty {
-                TopCustomersHorizontalView(customers: customers)
+                TopCustomersListView(customers: customers)
             }
 
-            // 4. Dealer Performance (Horizontal Scroll Table)
-            if let performance = dealerPerformance, !performance.isEmpty {
-                DealerPerformanceTableView(items: performance)
-            }
-
-            // 5. Support Ticket Summary
-            if let tickets = supportTicketSummary {
-                SupportTicketSummaryView(summary: tickets)
-            }
-
-            // 6. Low Stock Table (Horizontal Scroll Table)
-            if let lowStock = lowStockItems, !lowStock.isEmpty {
-                LowStockTableView(items: lowStock)
+            // 6. Dealer Performance
+            if let dealers = dealerPerformance, !dealers.isEmpty {
+                DealerPerformanceListView(dealers: dealers)
             }
         }
     }
 }
 
-// MARK: - 1. Orders Pipeline View
+// MARK: - 1. Performance Section
 
-struct OrdersPipelineView: View {
+struct PerformanceSectionView: View {
+    let metrics: [PerformanceMetricRow]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text("Performance")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.primary)
+                Spacer()
+                Text("Year over Year")
+                    .font(.system(size: 11, weight: .regular))
+                    .foregroundColor(.secondary)
+            }
+
+            VStack(spacing: 0) {
+                ForEach(Array(metrics.enumerated()), id: \.element.id) { index, row in
+                    HStack {
+                        Text(row.title)
+                            .font(.system(size: 13, weight: .regular))
+                            .foregroundColor(.primary)
+
+                        Spacer()
+
+                        Text(row.value)
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundColor(.primary)
+
+                        Text(row.trend)
+                            .font(.system(size: 10, weight: .bold))
+                            .foregroundColor(Color.green)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color.green.opacity(0.12))
+                            .clipShape(Capsule())
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+
+                    if index < metrics.count - 1 {
+                        Divider()
+                            .padding(.leading, 12)
+                    }
+                }
+            }
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+            )
+        }
+    }
+}
+
+// MARK: - 2. Sales Orders Pipeline
+
+struct SalesOrdersPipelineView: View {
     let pipeline: OrdersPipelineSummary
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
-            Text(ConstantString.ordersPipeline)
-                .font(CommonFont.subheadline)
-                .bold()
-                .foregroundColor(CommonColor.primaryText)
-
-            HStack(spacing: CommonSpacing.xs) {
-                PipelineStageBadge(title: ConstantString.pipelineNew, count: pipeline.newCount, color: CommonColor.info)
-                PipelineStageBadge(title: ConstantString.pipelineConfirmed, count: pipeline.confirmedCount, color: CommonColor.primary)
-                PipelineStageBadge(title: ConstantString.pipelineProcessing, count: pipeline.processingCount, color: CommonColor.warning)
-                PipelineStageBadge(title: ConstantString.pipelineShipped, count: pipeline.shippedCount, color: CommonColor.accent)
-                PipelineStageBadge(title: ConstantString.pipelineDelivered, count: pipeline.deliveredCount, color: CommonColor.success)
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text("Sales Orders")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.primary)
+                Spacer()
+                Button("View all →") {}
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.blue)
             }
+
+            VStack(spacing: 12) {
+                HStack(spacing: 4) {
+                    PipelineStageItem(stage: "New", count: pipeline.newCount, value: pipeline.newValue, isCompleted: true)
+                    PipelineStageItem(stage: "Confirmed", count: pipeline.confirmedCount, value: pipeline.confirmedValue, isCompleted: true)
+                    PipelineStageItem(stage: "Processing", count: pipeline.processingCount, value: pipeline.processingValue, isCompleted: true)
+                    PipelineStageItem(stage: "Shipped", count: pipeline.shippedCount, value: pipeline.shippedValue, isCompleted: false)
+                    PipelineStageItem(stage: "Delivered", count: pipeline.deliveredCount, value: pipeline.deliveredValue, isCompleted: false)
+                }
+            }
+            .padding(12)
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+            )
         }
-        .padding(CommonSpacing.md)
-        .background(CommonColor.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
     }
 }
 
-struct PipelineStageBadge: View {
-    let title: String
+struct PipelineStageItem: View {
+    let stage: String
     let count: Int
-    let color: Color
+    let value: String
+    let isCompleted: Bool
 
     var body: some View {
-        VStack(spacing: 2) {
-            Text("\(count)")
-                .font(CommonFont.subheadline)
-                .bold()
-                .foregroundColor(color)
+        VStack(spacing: 6) {
+            // Top Blue Bar
+            Rectangle()
+                .fill(isCompleted ? Color.blue : Color.blue.opacity(0.3))
+                .frame(height: 3)
+                .cornerRadius(1.5)
 
-            Text(title)
-                .font(CommonFont.caption2)
-                .foregroundColor(CommonColor.secondaryText)
+            Text(stage)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundColor(.secondary)
                 .lineLimit(1)
-                .minimumScaleFactor(0.7)
+                .minimumScaleFactor(0.8)
+
+            Text("\(count)")
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(.primary)
+
+            Text(value)
+                .font(.system(size: 9, weight: .regular))
+                .foregroundColor(.secondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, CommonSpacing.xs)
-        .background(color.opacity(0.1))
-        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusSm))
     }
 }
 
-// MARK: - 2. Top Customers Horizontal Scroll Cards
+// MARK: - 3. Payment Collection
 
-struct TopCustomersHorizontalView: View {
-    let customers: [TopCustomer]
+struct PaymentCollectionView: View {
+    let payment: PaymentCollectionSummary
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text(ConstantString.topCustomers)
-                    .font(CommonFont.subheadline)
-                    .bold()
-                    .foregroundColor(CommonColor.primaryText)
+                Text("Payment Collection")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.primary)
                 Spacer()
-                Text("Swipe")
-                    .font(CommonFont.caption2)
-                    .foregroundColor(CommonColor.secondaryText)
+                Text(payment.totalInvoiced)
+                    .font(.system(size: 11, weight: .regular))
+                    .foregroundColor(.secondary)
             }
-            .padding(.horizontal, CommonSpacing.xs)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: CommonSpacing.sm) {
-                    ForEach(customers) { customer in
-                        VStack(alignment: .leading, spacing: CommonSpacing.xs) {
-                            HStack {
-                                Text(customer.name)
-                                    .font(CommonFont.subheadline)
-                                    .bold()
-                                    .foregroundColor(CommonColor.primaryText)
-                                    .lineLimit(1)
-                                Spacer()
-                                HealthBadge(status: customer.paymentHealth)
-                            }
+            VStack(alignment: .leading, spacing: 12) {
+                // Main Stat & Health Badge
+                HStack(alignment: .firstTextBaseline) {
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Text(String(format: "%.2f%%", payment.collectedPercentage))
+                            .font(.system(size: 26, weight: .bold))
+                            .foregroundColor(.primary)
 
-                            Text(CommonCurrencyFormatter.format(customer.revenue))
-                                .font(CommonFont.kpiSubValue)
-                                .foregroundColor(CommonColor.primary)
-                        }
-                        .padding(CommonSpacing.sm)
-                        .frame(width: 170, alignment: .leading)
-                        .background(CommonColor.cardBackground)
-                        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-                        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
+                        Text("collected")
+                            .font(.system(size: 13, weight: .regular))
+                            .foregroundColor(.secondary)
+                    }
+
+                    Spacer()
+
+                    Text(payment.statusBadge)
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundColor(Color.green)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(Color.green.opacity(0.12))
+                        .clipShape(Capsule())
+                }
+
+                // Multi-segment progress bar
+                GeometryReader { geo in
+                    HStack(spacing: 2) {
+                        Rectangle()
+                            .fill(Color.blue)
+                            .frame(width: geo.size.width * 0.755)
+
+                        Rectangle()
+                            .fill(Color.purple)
+                            .frame(width: geo.size.width * 0.16)
+
+                        Rectangle()
+                            .fill(Color.red)
                     }
                 }
-                .padding(.horizontal, 2)
-                .padding(.vertical, 2)
+                .frame(height: 6)
+                .clipShape(Capsule())
+
+                // 3 Stat Columns
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        HStack(spacing: 4) {
+                            Circle().fill(Color.blue).frame(width: 6, height: 6)
+                            Text("Collected")
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundColor(.secondary)
+                        }
+                        Text(payment.collectedAmount)
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundColor(.primary)
+                    }
+
+                    Spacer()
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        HStack(spacing: 4) {
+                            Circle().fill(Color.purple).frame(width: 6, height: 6)
+                            Text("Pending")
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundColor(.secondary)
+                        }
+                        Text(payment.pendingAmount)
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundColor(.primary)
+                    }
+
+                    Spacer()
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        HStack(spacing: 4) {
+                            Circle().fill(Color.red).frame(width: 6, height: 6)
+                            Text("Overdue")
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundColor(.secondary)
+                        }
+                        Text(payment.overdueAmount)
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundColor(Color.red)
+                    }
+                }
             }
+            .padding(12)
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+            )
         }
     }
 }
 
-struct HealthBadge: View {
-    let status: String
+// MARK: - 4. Pending Approvals List
 
-    var body: some View {
-        Text(status)
-            .font(CommonFont.caption2)
-            .bold()
-            .padding(.horizontal, 6)
-            .padding(.vertical, 2)
-            .foregroundColor(badgeColor)
-            .background(badgeColor.opacity(0.12))
-            .clipShape(Capsule())
-    }
-
-    private var badgeColor: Color {
-        switch status.lowercased() {
-        case "paid": return CommonColor.success
-        case "outstanding": return CommonColor.warning
-        case "overdue": return CommonColor.danger
-        default: return CommonColor.neutral
-        }
-    }
-}
-
-// MARK: - 3. Pending Approvals Horizontal Scroll Cards
-
-struct PendingApprovalsHorizontalView: View {
+struct PendingApprovalsListView: View {
     let approvals: [PendingApproval]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text(ConstantString.pendingApprovals)
-                    .font(CommonFont.subheadline)
-                    .bold()
-                    .foregroundColor(CommonColor.primaryText)
+                Text("Pending Approvals")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.primary)
                 Spacer()
-                Text("\(approvals.count) pending")
-                    .font(CommonFont.caption2)
-                    .foregroundColor(CommonColor.warning)
+                Button("View all (\(approvals.count)) →") {}
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.blue)
             }
-            .padding(.horizontal, CommonSpacing.xs)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: CommonSpacing.sm) {
-                    ForEach(approvals) { item in
-                        VStack(alignment: .leading, spacing: CommonSpacing.xs) {
-                            HStack {
-                                Text(item.type)
-                                    .font(CommonFont.caption2)
-                                    .bold()
-                                    .foregroundColor(CommonColor.warning)
-                                Spacer()
-                                Text(item.date)
-                                    .font(CommonFont.caption2)
-                                    .foregroundColor(CommonColor.secondaryText)
-                            }
+            VStack(spacing: 0) {
+                ForEach(Array(approvals.enumerated()), id: \.element.id) { index, item in
+                    HStack(spacing: 12) {
+                        // Tinted Icon Circle
+                        ZStack {
+                            Circle()
+                                .fill(categoryColor(for: item.iconColorCategory).opacity(0.12))
+                                .frame(width: 28, height: 28)
 
+                            Image(systemName: item.iconName)
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(categoryColor(for: item.iconColorCategory))
+                        }
+
+                        // Title & Details
+                        VStack(alignment: .leading, spacing: 2) {
                             Text(item.title)
-                                .font(CommonFont.subheadline)
-                                .bold()
-                                .foregroundColor(CommonColor.primaryText)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(.primary)
                                 .lineLimit(1)
 
-                            HStack {
-                                Text(item.requestedBy)
-                                    .font(CommonFont.caption)
-                                    .foregroundColor(CommonColor.secondaryText)
-                                Spacer()
-                                Text(CommonCurrencyFormatter.format(item.amount))
-                                    .font(CommonFont.subheadline)
-                                    .bold()
-                                    .foregroundColor(CommonColor.primaryText)
-                            }
+                            Text(item.categoryDetails)
+                                .font(.system(size: 11, weight: .regular))
+                                .foregroundColor(.secondary)
+                                .lineLimit(1)
                         }
-                        .padding(CommonSpacing.sm)
-                        .frame(width: 220, alignment: .leading)
-                        .background(CommonColor.cardBackground)
-                        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-                        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
+
+                        Spacer()
+
+                        // Amount & Chevron
+                        Text(item.amount)
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundColor(.primary)
+
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(Color(UIColor.tertiaryLabel))
                     }
-                }
-                .padding(.horizontal, 2)
-                .padding(.vertical, 2)
-            }
-        }
-    }
-}
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
 
-// MARK: - 4. Dealer Performance Table
-
-struct DealerPerformanceTableView: View {
-    let items: [DealerPerformanceItem]
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
-            Text(ConstantString.dealerPerformance)
-                .font(CommonFont.subheadline)
-                .bold()
-                .foregroundColor(CommonColor.primaryText)
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                VStack(alignment: .leading, spacing: CommonSpacing.xs) {
-                    HStack {
-                        Text(ConstantString.region).frame(width: 80, alignment: .leading)
-                        Text(ConstantString.mtdOrders).frame(width: 70, alignment: .trailing)
-                        Text(ConstantString.sales).frame(width: 90, alignment: .trailing)
-                        Text(ConstantString.targetAchievement).frame(width: 70, alignment: .trailing)
-                        Text(ConstantString.commissionDue).frame(width: 90, alignment: .trailing)
-                    }
-                    .font(CommonFont.caption2)
-                    .bold()
-                    .foregroundColor(CommonColor.secondaryText)
-
-                    Divider()
-
-                    ForEach(items) { item in
-                        HStack {
-                            Text(item.region).frame(width: 80, alignment: .leading)
-                            Text("\(item.mtdOrders)").frame(width: 70, alignment: .trailing)
-                            Text(CommonCurrencyFormatter.format(item.sales)).frame(width: 90, alignment: .trailing)
-                            Text(String(format: "%.0f%%", item.targetAchievementPercentage)).frame(width: 70, alignment: .trailing)
-                            Text(CommonCurrencyFormatter.format(item.commissionDue)).frame(width: 90, alignment: .trailing)
-                        }
-                        .font(CommonFont.caption)
-                        .padding(.vertical, 2)
+                    if index < approvals.count - 1 {
+                        Divider()
+                            .padding(.leading, 52)
                     }
                 }
             }
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+            )
         }
-        .padding(CommonSpacing.md)
-        .background(CommonColor.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
-    }
-}
-
-// MARK: - 5. Support Ticket Summary
-
-struct SupportTicketSummaryView: View {
-    let summary: SupportTicketSummary
-
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(ConstantString.supportTicketSummary)
-                    .font(CommonFont.subheadline)
-                    .bold()
-                    .foregroundColor(CommonColor.primaryText)
-
-                Text("\(summary.openTicketsCount) Open Tickets • Priority: \(summary.priority)")
-                    .font(CommonFont.caption)
-                    .foregroundColor(CommonColor.secondaryText)
-            }
-
-            Spacer()
-
-            SLABadge(status: summary.slaStatus)
-        }
-        .padding(CommonSpacing.md)
-        .background(CommonColor.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
-    }
-}
-
-struct SLABadge: View {
-    let status: String
-
-    var body: some View {
-        Text(status)
-            .font(CommonFont.caption2)
-            .bold()
-            .padding(.horizontal, CommonSpacing.sm)
-            .padding(.vertical, 4)
-            .foregroundColor(badgeColor)
-            .background(badgeColor.opacity(0.12))
-            .clipShape(Capsule())
     }
 
-    private var badgeColor: Color {
-        switch status.lowercased() {
-        case "on track": return CommonColor.success
-        case "at risk": return CommonColor.warning
-        case "breached": return CommonColor.danger
-        default: return CommonColor.neutral
+    private func categoryColor(for name: String) -> Color {
+        switch name.lowercased() {
+        case "purple": return .purple
+        case "red": return .red
+        case "green": return .green
+        default: return .blue
         }
     }
 }
 
-// MARK: - 6. Low Stock Table
+// MARK: - 5. Top Customers List
 
-struct LowStockTableView: View {
-    let items: [LowStockItem]
+struct TopCustomersListView: View {
+    let customers: [TopCustomer]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text(ConstantString.lowStockTable)
-                    .font(CommonFont.subheadline)
-                    .bold()
-                    .foregroundColor(CommonColor.primaryText)
-
+                Text("Top Customers")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.primary)
                 Spacer()
-
-                Text("\(items.count) items")
-                    .font(CommonFont.caption2)
-                    .foregroundColor(CommonColor.danger)
+                Text("By Billed Volume")
+                    .font(.system(size: 11, weight: .regular))
+                    .foregroundColor(.secondary)
             }
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                VStack(alignment: .leading, spacing: CommonSpacing.xs) {
-                    HStack {
-                        Text(ConstantString.sku).frame(width: 90, alignment: .leading)
-                        Text(ConstantString.productName).frame(width: 140, alignment: .leading)
-                        Text(ConstantString.category).frame(width: 90, alignment: .leading)
-                        Text(ConstantString.stockLevel).frame(width: 70, alignment: .trailing)
-                        Text(ConstantString.reorderLevel).frame(width: 80, alignment: .trailing)
-                        Text(ConstantString.warehouse).frame(width: 90, alignment: .leading)
-                    }
-                    .font(CommonFont.caption2)
-                    .bold()
-                    .foregroundColor(CommonColor.secondaryText)
+            VStack(spacing: 0) {
+                ForEach(Array(customers.enumerated()), id: \.element.id) { index, item in
+                    HStack(spacing: 12) {
+                        // Number Circle
+                        ZStack {
+                            Circle()
+                                .fill(Color(UIColor.systemGray5))
+                                .frame(width: 22, height: 22)
 
-                    Divider()
-
-                    ForEach(items) { item in
-                        HStack {
-                            Text(item.sku).frame(width: 90, alignment: .leading)
-                            Text(item.productName).frame(width: 140, alignment: .leading)
-                            Text(item.category).frame(width: 90, alignment: .leading)
-                            Text("\(item.stockLevel)")
-                                .bold()
-                                .foregroundColor(CommonColor.danger)
-                                .frame(width: 70, alignment: .trailing)
-                            Text("\(item.reorderLevel)").frame(width: 80, alignment: .trailing)
-                            Text(item.warehouse).frame(width: 90, alignment: .leading)
+                            Text("\(item.rank)")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundColor(.secondary)
                         }
-                        .font(CommonFont.caption)
-                        .padding(.vertical, 2)
+
+                        // Name & Category
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(item.name)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(.primary)
+                                .lineLimit(1)
+
+                            Text(item.subtitle)
+                                .font(.system(size: 11, weight: .regular))
+                                .foregroundColor(.secondary)
+                                .lineLimit(1)
+                        }
+
+                        Spacer()
+
+                        // Revenue
+                        Text(item.revenue)
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundColor(.primary)
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+
+                    if index < customers.count - 1 {
+                        Divider()
+                            .padding(.leading, 46)
                     }
                 }
             }
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+            )
         }
-        .padding(CommonSpacing.md)
-        .background(CommonColor.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
+    }
+}
+
+// MARK: - 6. Dealer Performance List
+
+struct DealerPerformanceListView: View {
+    let dealers: [DealerPerformanceItem]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text("Dealer Performance")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.primary)
+                Spacer()
+                Text("Q3 Quota")
+                    .font(.system(size: 11, weight: .regular))
+                    .foregroundColor(.secondary)
+            }
+
+            VStack(spacing: 0) {
+                ForEach(Array(dealers.enumerated()), id: \.element.id) { index, item in
+                    HStack(spacing: 12) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(item.name)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(.primary)
+                                .lineLimit(1)
+
+                            Text(item.volumeSubtitle)
+                                .font(.system(size: 11, weight: .regular))
+                                .foregroundColor(.secondary)
+                        }
+
+                        Spacer()
+
+                        VStack(alignment: .trailing, spacing: 2) {
+                            Text("\(item.targetPercentage)%")
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(item.targetPercentage >= 80 ? Color.green : Color.orange)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 1)
+                                .background((item.targetPercentage >= 80 ? Color.green : Color.orange).opacity(0.12))
+                                .clipShape(Capsule())
+
+                            Text(item.ordersCountText)
+                                .font(.system(size: 10, weight: .regular))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+
+                    if index < dealers.count - 1 {
+                        Divider()
+                            .padding(.leading, 12)
+                    }
+                }
+            }
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+            )
+        }
     }
 }

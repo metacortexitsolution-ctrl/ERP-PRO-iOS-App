@@ -76,6 +76,7 @@ public struct AppCoordinatorView: View {
                     .tag(tab)
                 }
             }
+            .accentColor(.blue)
         }
     }
 

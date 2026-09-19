@@ -13,74 +13,128 @@ public struct DashboardAlertSection: View {
     }
 
     public var body: some View {
-        if !alerts.isEmpty {
-            if alerts.count == 1 {
-                AlertBannerRow(alert: alerts[0])
-            } else {
-                TabView {
-                    ForEach(alerts) { alert in
-                        AlertBannerRow(alert: alert)
-                            .padding(.horizontal, 2)
+        VStack(alignment: .leading, spacing: 6) {
+            // Priority Header Line
+            HStack {
+                Text("PRIORITY ALERTS")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundColor(.secondary)
+                
+                Spacer()
+                
+                HStack(spacing: 3) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 9, weight: .bold))
+                    Text("Actionable")
+                        .font(.system(size: 11, weight: .semibold))
+                }
+                .foregroundColor(Color.red)
+                .padding(.horizontal, 7)
+                .padding(.vertical, 3)
+                .background(Color.red.opacity(0.12))
+                .clipShape(Capsule())
+            }
+            .padding(.horizontal, 2)
+
+            // Alert List Container
+            VStack(spacing: 0) {
+                ForEach(Array(alerts.enumerated()), id: \.element.id) { index, alert in
+                    AlertRowItem(alert: alert)
+                    
+                    if index < alerts.count - 1 {
+                        Divider()
+                            .padding(.leading, 44)
                     }
                 }
-                .tabViewStyle(.page(indexDisplayMode: .always))
-                .frame(height: 95)
+
+                Divider()
+
+                // View All Link
+                Button {
+                    // View all alerts action
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("View all alerts →")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundColor(.blue)
+                        Spacer()
+                    }
+                    .padding(.vertical, 10)
+                }
             }
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+            )
         }
     }
 }
 
-struct AlertBannerRow: View {
+struct AlertRowItem: View {
     let alert: AlertBannerItem
 
     var body: some View {
-        HStack(spacing: CommonSpacing.md) {
-            Image(systemName: iconName(for: alert.severity))
-                .font(.headline)
-                .foregroundColor(severityColor(for: alert.severity))
+        HStack(spacing: 12) {
+            // Tinted Icon Circle
+            ZStack {
+                Circle()
+                    .fill(iconBackgroundColor)
+                    .frame(width: 28, height: 28)
 
+                Image(systemName: alert.iconName)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(iconForegroundColor)
+            }
+
+            // Title & Subtitle
             VStack(alignment: .leading, spacing: 2) {
-                Text(alert.type.uppercased())
-                    .font(CommonFont.caption2)
-                    .bold()
-                    .foregroundColor(severityColor(for: alert.severity))
+                Text(alert.title)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.primary)
 
-                Text(alert.message)
-                    .font(CommonFont.subheadline)
-                    .foregroundColor(CommonColor.primaryText)
-                    .lineLimit(2)
+                if alert.severity == "danger" {
+                    Text(alert.subtitle)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(Color.red)
+                } else {
+                    Text(alert.subtitle)
+                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(.secondary)
+                }
             }
 
             Spacer()
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundColor(Color(UIColor.tertiaryLabel))
         }
-        .padding(CommonSpacing.md)
-        .background(severityColor(for: alert.severity).opacity(0.1))
-        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd))
-        .overlay(
-            RoundedRectangle(cornerRadius: CommonSpacing.cornerRadiusMd)
-                .stroke(severityColor(for: alert.severity).opacity(0.25), lineWidth: 1)
-        )
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
     }
 
-    private func iconName(for severity: String) -> String {
-        switch severity.lowercased() {
-        case "critical", "danger", "error":
-            return "exclamationmark.triangle.fill"
-        case "warning":
-            return "exclamationmark.circle.fill"
+    private var iconBackgroundColor: Color {
+        switch alert.severity.lowercased() {
+        case "danger":
+            return Color.red.opacity(0.12)
+        case "purple":
+            return Color.purple.opacity(0.12)
         default:
-            return "info.circle.fill"
+            return Color.blue.opacity(0.12)
         }
     }
 
-    private func severityColor(for severity: String) -> Color {
-        switch severity.lowercased() {
-        case "critical", "danger", "error":
-            return CommonColor.danger
-        case "warning":
-            return CommonColor.warning
+    private var iconForegroundColor: Color {
+        switch alert.severity.lowercased() {
+        case "danger":
+            return Color.red
+        case "purple":
+            return Color.purple
         default:
-            return CommonColor.info
+            return Color.blue
         }
     }
 }
