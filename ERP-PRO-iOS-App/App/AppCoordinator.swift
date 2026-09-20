@@ -90,7 +90,7 @@ public struct AppCoordinatorView: View {
         case .payment:
             TabPlaceholderView(title: ConstantString.payment, description: ConstantString.paymentModulePlaceholder)
         case .more:
-            MorePlaceholderView()
+            MoreView()
         case .settings:
             TabPlaceholderView(title: ConstantString.settings, description: ConstantString.settingsModulePlaceholder)
         }
