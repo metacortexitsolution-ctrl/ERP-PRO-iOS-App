@@ -105,10 +105,10 @@ struct LoadedDashboardStateView: View {
                             }
                             .padding(.horizontal, 10)
                             .padding(.vertical, 6)
-                            .background(Color(UIColor.secondarySystemGroupedBackground))
+                            .background(CommonColor.cardBackground)
                             .clipShape(Capsule())
                             .overlay(
-                                Capsule().stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+                                Capsule().stroke(CommonColor.border, lineWidth: 0.8)
                             )
                         }
                         .sheet(isPresented: $headerViewState.showingPeriodSheet) {
@@ -172,7 +172,7 @@ struct LoadedDashboardStateView: View {
             .padding(.top, 8)
             .padding(.bottom, 24)
         }
-        .background(Color(UIColor.systemGroupedBackground))
+        .background(CommonColor.background)
         .refreshable {
             await controller.fetchDashboardData()
         }
@@ -191,7 +191,7 @@ struct LoadingDashboardStateView: View {
                 .foregroundColor(CommonColor.secondaryText)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(UIColor.systemGroupedBackground))
+        .background(CommonColor.background)
     }
 }
 
@@ -230,7 +230,7 @@ struct EmptyDashboardStateView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(UIColor.systemGroupedBackground))
+        .background(CommonColor.background)
     }
 }
 
@@ -270,6 +270,6 @@ struct ErrorDashboardStateView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(UIColor.systemGroupedBackground))
+        .background(CommonColor.background)
     }
 }

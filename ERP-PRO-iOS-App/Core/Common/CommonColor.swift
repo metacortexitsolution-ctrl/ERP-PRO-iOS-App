@@ -12,9 +12,19 @@ public struct CommonColor {
     public static let accent = Color.cyan
     
     // Backgrounds & Surfaces
-    public static let background = Color(UIColor.systemGroupedBackground)
+    public static let background = Color(UIColor { traitCollection in
+        traitCollection.userInterfaceStyle == .dark ? UIColor.systemGroupedBackground : .white
+    })
     public static let cardBackground = Color(UIColor.secondarySystemGroupedBackground)
     public static let tertiaryBackground = Color(UIColor.tertiarySystemGroupedBackground)
+    
+    // Borders & Dividers
+    public static let border = Color(UIColor { traitCollection in
+        traitCollection.userInterfaceStyle == .dark
+            ? UIColor.separator.withAlphaComponent(0.6)
+            : UIColor.systemGray4.withAlphaComponent(0.75)
+    })
+    public static let cardBorder = border
     
     // Status Colors
     public static let success = Color.green

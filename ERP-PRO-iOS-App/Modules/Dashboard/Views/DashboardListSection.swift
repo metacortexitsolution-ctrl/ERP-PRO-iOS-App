@@ -111,12 +111,13 @@ struct PerformanceSectionView: View {
                     }
                 }
             }
-            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .background(CommonColor.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+                    .stroke(CommonColor.cardBorder, lineWidth: 0.8)
             )
+            .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
         }
     }
 }
@@ -148,12 +149,13 @@ struct SalesOrdersPipelineView: View {
                 }
             }
             .padding(12)
-            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .background(CommonColor.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+                    .stroke(CommonColor.cardBorder, lineWidth: 0.8)
             )
+            .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
         }
     }
 }
@@ -295,12 +297,13 @@ struct PaymentCollectionView: View {
                 }
             }
             .padding(12)
-            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .background(CommonColor.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+                    .stroke(CommonColor.cardBorder, lineWidth: 0.8)
             )
+            .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
         }
     }
 }
@@ -369,12 +372,13 @@ struct PendingApprovalsListView: View {
                     }
                 }
             }
-            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .background(CommonColor.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+                    .stroke(CommonColor.cardBorder, lineWidth: 0.8)
             )
+            .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
         }
     }
 
@@ -448,12 +452,13 @@ struct TopCustomersListView: View {
                     }
                 }
             }
-            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .background(CommonColor.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+                    .stroke(CommonColor.cardBorder, lineWidth: 0.8)
             )
+            .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
         }
     }
 }
@@ -514,12 +519,13 @@ struct DealerPerformanceListView: View {
                     }
                 }
             }
-            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .background(CommonColor.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+                    .stroke(CommonColor.cardBorder, lineWidth: 0.8)
             )
+            .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
         }
     }
 }

@@ -63,12 +63,13 @@ public struct DashboardAlertSection: View {
                     .padding(.vertical, 10)
                 }
             }
-            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .background(CommonColor.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(Color(UIColor.separator).opacity(0.4), lineWidth: 0.5)
+                    .stroke(CommonColor.cardBorder, lineWidth: 0.8)
             )
+            .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
         }
     }
 }

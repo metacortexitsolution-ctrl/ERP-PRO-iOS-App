@@ -133,12 +133,17 @@ public struct PeriodFilterSheet: View {
                     .contentShape(Rectangle())
                 }
             }
-            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .background(CommonColor.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .stroke(CommonColor.cardBorder, lineWidth: 0.8)
+            )
+            .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
             .padding(.horizontal, 16)
             .padding(.bottom, 16)
         }
-        .background(Color(UIColor.systemGroupedBackground))
+        .background(CommonColor.background)
         .sheet(isPresented: $viewState.showingCustomRangeSheet) {
             CustomDateRangeSheet(
                 initialOption: selectedOption,
@@ -253,8 +258,12 @@ public struct CustomDateRangeSheet: View {
                 }
                 .padding(.horizontal, 16)
                 .frame(height: 50)
-                .background(Color(UIColor.secondarySystemGroupedBackground))
+                .background(CommonColor.cardBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .stroke(CommonColor.cardBorder, lineWidth: 0.8)
+                )
 
                 // End Date Picker Row
                 HStack {
@@ -275,13 +284,17 @@ public struct CustomDateRangeSheet: View {
                 }
                 .padding(.horizontal, 16)
                 .frame(height: 50)
-                .background(Color(UIColor.secondarySystemGroupedBackground))
+                .background(CommonColor.cardBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .stroke(CommonColor.cardBorder, lineWidth: 0.8)
+                )
             }
             .padding(16)
 
             Spacer()
         }
-        .background(Color(UIColor.systemGroupedBackground))
+        .background(CommonColor.background)
     }
 }
