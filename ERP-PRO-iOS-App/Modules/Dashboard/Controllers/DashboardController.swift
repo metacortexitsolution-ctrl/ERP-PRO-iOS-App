@@ -71,24 +71,37 @@ public final class DashboardController: ObservableObject {
         kpis: DashboardKPIMetrics(
             totalSales: KPISalesMetric(
                 formattedAmount: "₹48.20 L",
-                trendText: "↑ 11.8%",
+                trendText: "↗ +11.8% vs prior",
                 isPositiveTrend: true
             ),
             revenueOverview: KPIRevenueMetric(
                 formattedAmount: "₹62.80 L",
-                trendText: "↑ 8.3%",
+                trendText: "↗ +8.3% vs prior",
                 isPositiveTrend: true
             ),
             pendingPayments: KPIPendingPaymentsMetric(
                 formattedAmount: "₹14.60 L",
-                invoiceBadge: "42 inv",
-                trendText: "↓ 9.9%",
-                isPositiveTrend: true
+                invoiceBadge: "42 invoices",
+                trendText: "↘ -9.9% vs prior",
+                isPositiveTrend: false
             ),
             ordersSummary: KPIOrdersMetric(
                 countText: "186",
-                pendingBadge: "36 pend",
-                targetBadge: "Target: 210"
+                pendingBadge: "36 pending"
+            ),
+            inventorySummary: KPIInventoryMetric(
+                countText: "428 Items"
+            ),
+            customerActivity: KPICustomerActivityMetric(
+                activeText: "42 Active",
+                newBadge: "6 NEW"
+            ),
+            lowStockAlerts: KPILowStockMetric(
+                countText: "18"
+            ),
+            businessOverview: KPIBusinessOverviewMetric(
+                percentageText: "92%",
+                targetBadge: "Target 100%"
             )
         ),
         performanceMetrics: [

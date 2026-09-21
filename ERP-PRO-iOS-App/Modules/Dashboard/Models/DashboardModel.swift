@@ -57,6 +57,30 @@ public struct DashboardKPIMetrics: Codable, Sendable {
     public let revenueOverview: KPIRevenueMetric?
     public let pendingPayments: KPIPendingPaymentsMetric?
     public let ordersSummary: KPIOrdersMetric?
+    public let inventorySummary: KPIInventoryMetric?
+    public let customerActivity: KPICustomerActivityMetric?
+    public let lowStockAlerts: KPILowStockMetric?
+    public let businessOverview: KPIBusinessOverviewMetric?
+
+    public init(
+        totalSales: KPISalesMetric? = nil,
+        revenueOverview: KPIRevenueMetric? = nil,
+        pendingPayments: KPIPendingPaymentsMetric? = nil,
+        ordersSummary: KPIOrdersMetric? = nil,
+        inventorySummary: KPIInventoryMetric? = nil,
+        customerActivity: KPICustomerActivityMetric? = nil,
+        lowStockAlerts: KPILowStockMetric? = nil,
+        businessOverview: KPIBusinessOverviewMetric? = nil
+    ) {
+        self.totalSales = totalSales
+        self.revenueOverview = revenueOverview
+        self.pendingPayments = pendingPayments
+        self.ordersSummary = ordersSummary
+        self.inventorySummary = inventorySummary
+        self.customerActivity = customerActivity
+        self.lowStockAlerts = lowStockAlerts
+        self.businessOverview = businessOverview
+    }
 }
 
 public struct KPISalesMetric: Codable, Sendable {
@@ -102,9 +126,45 @@ public struct KPIOrdersMetric: Codable, Sendable {
     public let pendingBadge: String
     public let targetBadge: String
     
-    public init(countText: String, pendingBadge: String, targetBadge: String) {
+    public init(countText: String, pendingBadge: String, targetBadge: String = "") {
         self.countText = countText
         self.pendingBadge = pendingBadge
+        self.targetBadge = targetBadge
+    }
+}
+
+public struct KPIInventoryMetric: Codable, Sendable {
+    public let countText: String
+
+    public init(countText: String) {
+        self.countText = countText
+    }
+}
+
+public struct KPICustomerActivityMetric: Codable, Sendable {
+    public let activeText: String
+    public let newBadge: String
+
+    public init(activeText: String, newBadge: String) {
+        self.activeText = activeText
+        self.newBadge = newBadge
+    }
+}
+
+public struct KPILowStockMetric: Codable, Sendable {
+    public let countText: String
+
+    public init(countText: String) {
+        self.countText = countText
+    }
+}
+
+public struct KPIBusinessOverviewMetric: Codable, Sendable {
+    public let percentageText: String
+    public let targetBadge: String
+
+    public init(percentageText: String, targetBadge: String) {
+        self.percentageText = percentageText
         self.targetBadge = targetBadge
     }
 }
