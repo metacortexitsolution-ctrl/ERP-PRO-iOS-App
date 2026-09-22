@@ -73,7 +73,7 @@ struct PerformanceSectionView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("Performance")
-                    .font(.system(size: 16, weight: .bold))
+                    .font(CommonFont.sectionHeading)
                     .foregroundColor(.primary)
                 Spacer()
                 Text("Year over Year")
@@ -131,7 +131,7 @@ struct SalesOrdersPipelineView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("Sales Orders")
-                    .font(.system(size: 16, weight: .bold))
+                    .font(CommonFont.sectionHeading)
                     .foregroundColor(.primary)
                 Spacer()
                 Button("View all →") {}
@@ -203,7 +203,7 @@ struct PaymentCollectionView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("Payment Collection")
-                    .font(.system(size: 16, weight: .bold))
+                    .font(CommonFont.sectionHeading)
                     .foregroundColor(.primary)
                 Spacer()
                 Text(payment.totalInvoiced)
@@ -317,7 +317,7 @@ struct PendingApprovalsListView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("Pending Approvals")
-                    .font(.system(size: 16, weight: .bold))
+                    .font(CommonFont.sectionHeading)
                     .foregroundColor(.primary)
                 Spacer()
                 Button("View all (\(approvals.count)) →") {}
@@ -401,7 +401,7 @@ struct TopCustomersListView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("Top Customers")
-                    .font(.system(size: 16, weight: .bold))
+                    .font(CommonFont.sectionHeading)
                     .foregroundColor(.primary)
                 Spacer()
                 Text("By Billed Volume")
@@ -472,7 +472,7 @@ struct DealerPerformanceListView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("Dealer Performance")
-                    .font(.system(size: 16, weight: .bold))
+                    .font(CommonFont.sectionHeading)
                     .foregroundColor(.primary)
                 Spacer()
                 Text("Q3 Quota")

@@ -59,78 +59,65 @@ public struct MoreMockData {
     public static var sections: [MoreSection] {
         [
             MoreSection(
-                title: "SALES & BILLING",
+                title: "SALES",
                 items: [
-                    MoreModuleItem(title: "Orders", subtitle: "Sales pipeline", iconName: "bag.fill", tintColor: .blue),
-                    MoreModuleItem(title: "Estimates", subtitle: "Quotations & bids", iconName: "doc.text.fill", tintColor: .blue),
-                    MoreModuleItem(title: "Challans", subtitle: "Delivery dispatch", iconName: "truck.box.fill", tintColor: .blue),
+                    MoreModuleItem(title: "Orders", subtitle: "Sales pipeline", iconName: "cart", tintColor: .blue),
+                    MoreModuleItem(title: "Quotations", subtitle: "Quotations & bids", iconName: "doc.text", tintColor: .blue),
+                    MoreModuleItem(title: "Delivery Challans", subtitle: "Delivery dispatch", iconName: "truck.box", tintColor: .blue),
                     MoreModuleItem(title: "Credit Notes", subtitle: "Sales return memos", iconName: "doc.badge.plus", tintColor: .blue)
                 ]
             ),
             MoreSection(
-                title: "PURCHASES & ACCOUNTS PAYABLE",
+                title: "PURCHASES",
                 items: [
-                    MoreModuleItem(title: "Purchase Orders", subtitle: "Procurement POs", iconName: "cart.fill", tintColor: .purple),
-                    MoreModuleItem(title: "Vendor Bills", subtitle: "Inward payables", iconName: "doc.text.fill", tintColor: .purple),
+                    MoreModuleItem(title: "Purchase Orders", subtitle: "Procurement POs", iconName: "doc.badge.gearshape", tintColor: .purple),
+                    MoreModuleItem(title: "Bills", subtitle: "Inward payables", iconName: "doc.plaintext", tintColor: .purple),
                     MoreModuleItem(title: "Debit Notes", subtitle: "Purchase return", iconName: "doc.badge.arrow.up", tintColor: .purple),
-                    MoreModuleItem(title: "Vendors", subtitle: "Supplier directory", iconName: "building.2.fill", tintColor: .purple)
+                    MoreModuleItem(title: "Vendors", subtitle: "Supplier directory", iconName: "storefront", tintColor: .purple)
                 ]
             ),
             MoreSection(
-                title: "INVENTORY & PRODUCTS",
+                title: "INVENTORY",
                 items: [
-                    MoreModuleItem(title: "Products Master", subtitle: "Items & pricing", iconName: "shippingbox.fill", tintColor: .green),
-                    MoreModuleItem(title: "Inventory Control", subtitle: "Stock & warehouses", iconName: "building.columns.fill", tintColor: .green)
+                    MoreModuleItem(title: "Products", subtitle: "Items & catalog", iconName: "shippingbox", tintColor: .green),
+                    MoreModuleItem(title: "Inventory", subtitle: "Stock & warehouses", iconName: "building.columns", tintColor: .green)
                 ]
             ),
             MoreSection(
-                title: "FINANCIALS & ACCOUNTING",
+                title: "FINANCE",
                 items: [
-                    MoreModuleItem(title: "Expenses", subtitle: "Claims & cash flows", iconName: "creditcard.fill", tintColor: Color.indigo),
-                    MoreModuleItem(title: "Reconciliation", subtitle: "Bank statements", iconName: "building.columns.fill", tintColor: Color.indigo),
-                    MoreModuleItem(title: "Revenue Rec.", subtitle: "Deferred & realized", iconName: "chart.line.uptrend.xyaxis", tintColor: .green, isFullWidth: true)
+                    MoreModuleItem(title: "Expenses", subtitle: "Claims & cash flows", iconName: "creditcard", tintColor: .indigo),
+                    MoreModuleItem(title: "Bank Reconciliation", subtitle: "Bank statements", iconName: "building.columns.fill", tintColor: .indigo),
+                    MoreModuleItem(title: "Revenue Recognition", subtitle: "Deferred & realized", iconName: "chart.line.uptrend.xyaxis", tintColor: .indigo)
                 ]
             ),
             MoreSection(
-                title: "CONTACTS",
+                title: "CUSTOMERS",
                 items: [
-                    MoreModuleItem(title: "Customers", subtitle: "Client directory", iconName: "person.2.fill", tintColor: .blue),
-                    MoreModuleItem(title: "Vendors", subtitle: "Supplier directory", iconName: "storefront.fill", tintColor: .purple)
-                ]
-            ),
-            MoreSection(
-                title: "ORGANIZATION",
-                items: [
-                    MoreModuleItem(title: "Customer Portal", subtitle: "Debtors & terms", iconName: "person.2.fill", tintColor: .blue),
-                    MoreModuleItem(title: "Multi-Company", subtitle: "Branches & units", iconName: "building.2.fill", tintColor: .purple)
+                    MoreModuleItem(title: "Customers", subtitle: "Client directory", iconName: "person.2", tintColor: .blue),
+                    MoreModuleItem(title: "Companies", subtitle: "Branches & units", iconName: "building.2", tintColor: .blue)
                 ]
             ),
             MoreSection(
                 title: "GST & TAX",
                 items: [
-                    MoreModuleItem(
-                        title: "Tax Compliance & ...",
-                        subtitle: "GSTR-1, GSTR-3B & tax liability",
-                        iconName: "tablecells.fill",
-                        tintColor: .green,
-                        badgeText: "Auto-GST",
-                        badgeColor: .green,
-                        isFullWidth: true
-                    )
+                    MoreModuleItem(title: "Tax Compliance", subtitle: "GSTR-1 & liability", iconName: "tablecells", tintColor: .orange),
+                    MoreModuleItem(title: "GST Summary", subtitle: "Tax filing overview", iconName: "chart.pie", tintColor: .orange)
                 ]
             ),
             MoreSection(
-                title: "REPORTS & ANALYTICS",
+                title: "REPORTS",
                 items: [
-                    MoreModuleItem(
-                        title: "Reports & Analytics",
-                        subtitle: "View financial, rece...",
-                        iconName: "chart.xyaxis.line",
-                        tintColor: .blue,
-                        badgeText: "10 Reports",
-                        badgeColor: .blue,
-                        isFullWidth: true
-                    )
+                    MoreModuleItem(title: "Executive Summary", subtitle: "Key business KPIs", iconName: "chart.bar.doc.horizontal", tintColor: .teal),
+                    MoreModuleItem(title: "Profit & Loss", subtitle: "Income & expenses", iconName: "chart.line.uptrend.xyaxis", tintColor: .teal),
+                    MoreModuleItem(title: "Balance Sheet", subtitle: "Assets & liabilities", iconName: "scales", tintColor: .teal),
+                    MoreModuleItem(title: "Cash Flow", subtitle: "Inflows & outflows", iconName: "arrow.triangle.2.circlepath", tintColor: .teal),
+                    MoreModuleItem(title: "AR Aging", subtitle: "Receivables aging", iconName: "clock.arrow.circlepath", tintColor: .teal),
+                    MoreModuleItem(title: "GST Report", subtitle: "GSTR audit logs", iconName: "doc.badge.gearshape", tintColor: .teal),
+                    MoreModuleItem(title: "Expense Report", subtitle: "Category breakdown", iconName: "doc.plaintext.fill", tintColor: .teal),
+                    MoreModuleItem(title: "Payment Report", subtitle: "Receipt & payout logs", iconName: "creditcard.fill", tintColor: .teal),
+                    MoreModuleItem(title: "Invoice Report", subtitle: "Billing breakdown", iconName: "doc.text.fill", tintColor: .teal),
+                    MoreModuleItem(title: "MRR Report", subtitle: "Recurring revenue", iconName: "chart.xyaxis.line", tintColor: .teal)
                 ]
             )
         ]

@@ -38,7 +38,17 @@ public enum AppTab: String, CaseIterable, Identifiable, Hashable {
 
 public final class AppCoordinatorState: ObservableObject {
     @Published public var selectedTab: AppTab = .dashboard
+    @Published public var selectedSidebarDestination: SidebarDestination? = .dashboard
+    @Published public var isSidebarCollapsed: Bool = false
+    @Published public var sidebarSearchText: String = ""
+
     public init() {}
+
+    public func toggleSidebar() {
+        withAnimation(.spring(response: 0.32, dampingFraction: 0.86)) {
+            isSidebarCollapsed.toggle()
+        }
+    }
 }
 
 public struct AppCoordinatorView: View {
@@ -50,20 +60,23 @@ public struct AppCoordinatorView: View {
     public var body: some View {
         if DeviceInfo.isPad || DeviceInfo.isMacCatalyst || horizontalSizeClass == .regular {
             NavigationSplitView {
-                List(selection: Binding(
-                    get: { coordinatorState.selectedTab },
-                    set: { newTab in if let newTab = newTab { coordinatorState.selectedTab = newTab } }
-                )) {
-                    ForEach(AppTab.allCases) { tab in
-                        NavigationLink(value: tab) {
-                            Label(tab.title, systemImage: tab.iconName)
-                        }
+                SidebarView(
+                    selectedItem: $coordinatorState.selectedSidebarDestination,
+                    searchText: $coordinatorState.sidebarSearchText,
+                    isCollapsed: coordinatorState.isSidebarCollapsed,
+                    onToggleSidebar: {
+                        coordinatorState.toggleSidebar()
                     }
-                }
-                .navigationTitle("ERP Pro")
+                )
+                .navigationSplitViewColumnWidth(
+                    min: coordinatorState.isSidebarCollapsed ? 70 : 280,
+                    ideal: coordinatorState.isSidebarCollapsed ? 80 : 310,
+                    max: coordinatorState.isSidebarCollapsed ? 90 : 350
+                )
             } detail: {
-                tabContentView(for: coordinatorState.selectedTab)
+                sidebarContentView(for: coordinatorState.selectedSidebarDestination)
             }
+            .toolbar(removing: .sidebarToggle)
         } else {
             TabView(selection: $coordinatorState.selectedTab) {
                 ForEach(AppTab.allCases) { tab in
@@ -95,6 +108,16 @@ public struct AppCoordinatorView: View {
             TabPlaceholderView(title: ConstantString.settings, description: ConstantString.settingsModulePlaceholder)
         }
     }
+
+    @ViewBuilder
+    private func sidebarContentView(for destination: SidebarDestination?) -> some View {
+        switch destination {
+        case .dashboard, .none:
+            DashboardView()
+        case .some(let dest):
+            TabPlaceholderView(title: dest.title, description: "\(dest.title) module & management")
+        }
+    }
 }
 
 // MARK: - Tab Placeholders (Internal to Navigation Shell)
@@ -117,35 +140,5 @@ struct TabPlaceholderView: View {
         }
         .padding()
         .navigationTitle(title)
-    }
-}
-
-struct MorePlaceholderView: View {
-    let modules: [String] = [
-        "Customers", "Vendors", "Products", "Orders",
-        "Estimates", "Delivery Challans", "Credit Notes", "Purchase Orders",
-        "Bills", "Debit Notes", "Expenses", "Inventory",
-        "Bank Reconciliation", "Revenue Recognition", "Tax Compliance", "Reports",
-        "Administration", "Companies", "Workflow Automation", "Customer Portal"
-    ]
-
-    var body: some View {
-        List {
-            Section(header: Text(ConstantString.moreModulesTitle)) {
-                ForEach(modules, id: \.self) { module in
-                    HStack {
-                        Image(systemName: "folder")
-                            .foregroundColor(CommonColor.primary)
-                        Text(module)
-                            .font(CommonFont.body)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.caption)
-                            .foregroundColor(CommonColor.secondaryText)
-                    }
-                }
-            }
-        }
-        .navigationTitle(ConstantString.more)
     }
 }

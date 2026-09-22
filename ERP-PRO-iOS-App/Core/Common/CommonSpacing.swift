@@ -13,7 +13,30 @@ public struct CommonSpacing {
     public static let xl: CGFloat = 24
     public static let xxl: CGFloat = 32
     
+    // System Spacing Specification
+    public static let cardPadding: CGFloat = 16
+    public static let elementSpacing: CGFloat = 12
+    public static let sectionSpacing: CGFloat = 24
+    public static let pageMargin: CGFloat = 20
+    
+    // Native Sidebar Specification
+    public static let sidebarRowHeight: CGFloat = 44
+    public static let sidebarWidth: CGFloat = 320
+    public static let sidebarHorizontalPadding: CGFloat = 12
+    public static let sidebarTopBottomPadding: CGFloat = 16
+    public static let sidebarItemSpacing: CGFloat = 3
+    public static let sidebarSectionHeaderTopPadding: CGFloat = 24
+    public static let sidebarSectionHeaderBottomPadding: CGFloat = 8
+    public static let sidebarIconTextSpacing: CGFloat = 12
+    public static let sidebarSelectionCornerRadius: CGFloat = 10
+    public static let companyAvatarSize: CGFloat = 38
+    public static let badgeHeight: CGFloat = 24
+    public static let searchFieldHeight: CGFloat = 38
+    
+    public static let dividerWidth: CGFloat = 1
+
     public static let cornerRadiusSm: CGFloat = 8
     public static let cornerRadiusMd: CGFloat = 12
     public static let cornerRadiusLg: CGFloat = 16
 }
+

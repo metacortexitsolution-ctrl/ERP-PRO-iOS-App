@@ -216,21 +216,21 @@ struct MetricCompactCard: View {
     let card: MetricCardData
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
             // Header Row: Title, Optional Title Badge, and Circular Icon
             HStack(alignment: .top, spacing: 4) {
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 3) {
                     Text(card.title)
-                        .font(.system(size: 11, weight: .medium))
+                        .font(CommonFont.secondaryText)
                         .foregroundColor(.secondary)
                         .lineLimit(1)
 
                     if let titleBadge = card.titleBadge {
                         Text(titleBadge)
-                            .font(.system(size: 9, weight: .bold))
+                            .font(CommonFont.captionBadge)
                             .foregroundColor(card.titleBadgeColor)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 3)
                             .background(card.titleBadgeColor.opacity(0.12))
                             .clipShape(Capsule())
                     }
@@ -241,10 +241,10 @@ struct MetricCompactCard: View {
                 ZStack {
                     Circle()
                         .fill(card.iconBgColor)
-                        .frame(width: 28, height: 28)
+                        .frame(width: 32, height: 32)
 
                     Image(systemName: card.iconName)
-                        .font(.system(size: 13, weight: .bold))
+                        .font(CommonFont.bodyMain)
                         .foregroundColor(card.iconColor)
                 }
             }
@@ -253,7 +253,7 @@ struct MetricCompactCard: View {
 
             // Amount Value
             Text(card.amount)
-                .font(.system(size: 19, weight: .bold))
+                .font(CommonFont.kpiValue)
                 .foregroundColor(.primary)
                 .minimumScaleFactor(0.8)
                 .lineLimit(1)
@@ -262,10 +262,10 @@ struct MetricCompactCard: View {
             HStack(alignment: .bottom) {
                 if let trendBadge = card.trendBadge {
                     Text(trendBadge)
-                        .font(.system(size: 9, weight: .bold))
+                        .font(CommonFont.captionBadge)
                         .foregroundColor(card.isPositiveTrend ? Color.green : Color.red)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 3)
                         .background((card.isPositiveTrend ? Color.green : Color.red).opacity(0.12))
                         .clipShape(Capsule())
                 }
@@ -273,16 +273,16 @@ struct MetricCompactCard: View {
                 Spacer(minLength: 4)
 
                 SparklineView(data: card.sparklineData, color: card.sparklineColor)
-                    .frame(width: 48, height: 18)
+                    .frame(width: 52, height: 22)
             }
         }
-        .padding(10)
-        .frame(maxWidth: .infinity, minHeight: 98, alignment: .topLeading)
+        .padding(CommonSpacing.cardPadding)
+        .frame(maxWidth: .infinity, minHeight: 110, alignment: .topLeading)
         .background(CommonColor.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .stroke(Color.gray.opacity(0.25), lineWidth: 1.0)
+                .stroke(Color.gray.opacity(0.25), lineWidth: CommonSpacing.dividerWidth)
         )
         .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 1)
     }

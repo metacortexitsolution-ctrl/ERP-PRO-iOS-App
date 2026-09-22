@@ -36,7 +36,7 @@ public struct MoreModuleCard: View {
                         .frame(width: 36, height: 36)
 
                     Image(systemName: item.iconName)
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(CommonFont.moreCardIcon)
                         .foregroundColor(item.tintColor)
                 }
 
@@ -44,18 +44,18 @@ public struct MoreModuleCard: View {
 
                 // Trailing Chevron
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(CommonFont.moreCardChevron)
                     .foregroundColor(Color(UIColor.tertiaryLabel))
             }
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.title)
-                    .font(.system(size: 15, weight: .bold))
+                    .font(CommonFont.moreCardTitle)
                     .foregroundColor(.primary)
                     .lineLimit(1)
 
                 Text(item.subtitle)
-                    .font(.system(size: 11, weight: .regular))
+                    .font(CommonFont.moreCardSubtitle)
                     .foregroundColor(.secondary)
                     .lineLimit(1)
             }
@@ -81,19 +81,19 @@ public struct MoreModuleCard: View {
                     .frame(width: 40, height: 40)
 
                 Image(systemName: item.iconName)
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(CommonFont.moreCardIconLarge)
                     .foregroundColor(item.tintColor)
             }
 
             // Title & Subtitle
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.title)
-                    .font(.system(size: 15, weight: .bold))
+                    .font(CommonFont.moreCardTitle)
                     .foregroundColor(.primary)
                     .lineLimit(1)
 
                 Text(item.subtitle)
-                    .font(.system(size: 11, weight: .regular))
+                    .font(CommonFont.moreCardSubtitle)
                     .foregroundColor(.secondary)
                     .lineLimit(1)
             }
@@ -103,7 +103,7 @@ public struct MoreModuleCard: View {
             // Optional Badge
             if let badgeText = item.badgeText, let badgeColor = item.badgeColor {
                 Text(badgeText)
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(CommonFont.moreCardBadge)
                     .foregroundColor(badgeColor)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -113,7 +113,7 @@ public struct MoreModuleCard: View {
 
             // Trailing Chevron
             Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
+                .font(CommonFont.moreCardChevron)
                 .foregroundColor(Color(UIColor.tertiaryLabel))
         }
         .padding(12)

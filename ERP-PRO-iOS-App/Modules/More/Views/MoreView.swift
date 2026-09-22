@@ -16,11 +16,11 @@ public struct MoreView: View {
                 // Search Bar
                 HStack(spacing: 8) {
                     Image(systemName: "magnifyingglass")
-                        .font(.system(size: 15, weight: .medium))
+                        .font(CommonFont.searchFieldIcon)
                         .foregroundColor(.secondary)
 
                     TextField("Search modules (e.g. gst, vendor, stock...)", text: $controller.searchText)
-                        .font(.system(size: 14, weight: .regular))
+                        .font(CommonFont.searchFieldText)
                         .foregroundColor(.primary)
 
                     if !controller.searchText.isEmpty {
@@ -28,7 +28,7 @@ public struct MoreView: View {
                             controller.searchText = ""
                         } label: {
                             Image(systemName: "xmark.circle.fill")
-                                .font(.system(size: 14))
+                                .font(CommonFont.searchFieldText)
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -51,7 +51,7 @@ public struct MoreView: View {
                     }
                 }
             }
-            .padding(.horizontal, 14)
+            .padding(.horizontal, 16)
             .padding(.top, 8)
             .padding(.bottom, 24)
         }
@@ -65,7 +65,7 @@ public struct MoreView: View {
                         // Notification Bell
                     } label: {
                         Image(systemName: "bell")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(CommonFont.barButtonIcon)
                             .foregroundColor(.primary)
                     }
 
@@ -77,7 +77,7 @@ public struct MoreView: View {
                                 .fill(Color.blue)
                                 .frame(width: 26, height: 26)
                             Image(systemName: "person.fill")
-                                .font(.system(size: 13, weight: .bold))
+                                .font(CommonFont.avatarInitial)
                                 .foregroundColor(.white)
                         }
                     }
@@ -95,11 +95,11 @@ public struct MoreView: View {
                 .padding(.top, 32)
 
             Text("No modules found")
-                .font(.system(size: 16, weight: .semibold))
+                .font(CommonFont.title3)
                 .foregroundColor(.primary)
 
             Text("Try searching with different keywords like 'bills', 'inventory', or 'tax'.")
-                .font(.system(size: 13, weight: .regular))
+                .font(CommonFont.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
@@ -126,7 +126,7 @@ struct MoreSectionView: View {
             // Section Header
             HStack {
                 Text(section.title)
-                    .font(.system(size: 11, weight: .bold))
+                    .font(CommonFont.moreSectionHeader)
                     .foregroundColor(.secondary)
 
                 Spacer()
@@ -135,7 +135,7 @@ struct MoreSectionView: View {
                     Button(actionTitle) {
                         // Section action
                     }
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(CommonFont.moreSectionAction)
                     .foregroundColor(.blue)
                 }
             }

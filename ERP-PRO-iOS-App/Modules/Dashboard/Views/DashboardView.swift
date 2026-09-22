@@ -72,17 +72,17 @@ struct LoadedDashboardStateView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading, spacing: CommonSpacing.sectionSpacing) {
                 // Header Area: Greeting & Business Overview
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: CommonSpacing.elementSpacing) {
                     HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 2) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("Good Morning,")
-                                .font(.system(size: 13, weight: .regular))
+                                .font(CommonFont.greetingSubtitle)
                                 .foregroundColor(.secondary)
 
                             Text("Business Overview")
-                                .font(.system(size: 22, weight: .bold))
+                                .font(CommonFont.dashboardTitle)
                                 .foregroundColor(.primary)
                         }
 
@@ -97,14 +97,14 @@ struct LoadedDashboardStateView: View {
                         } label: {
                             HStack(spacing: 4) {
                                 Text(headerViewState.selectedPeriod.title)
-                                    .font(.system(size: 12, weight: .medium))
+                                    .font(CommonFont.secondaryText)
                                     .foregroundColor(.primary)
                                 Image(systemName: "chevron.down")
-                                    .font(.system(size: 10, weight: .bold))
+                                    .font(CommonFont.captionBadge)
                                     .foregroundColor(.secondary)
                             }
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 6)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
                             .background(CommonColor.cardBackground)
                             .clipShape(Capsule())
                             .overlay(
@@ -130,18 +130,18 @@ struct LoadedDashboardStateView: View {
                         Button {
                             // Filter Action
                         } label: {
-                            HStack(spacing: 4) {
+                            HStack(spacing: 6) {
                                 Image(systemName: "slider.horizontal.3")
-                                    .font(.system(size: 11, weight: .semibold))
+                                    .font(CommonFont.buttonText)
                                 Text("Filter")
-                                    .font(.system(size: 12, weight: .semibold))
+                                    .font(CommonFont.buttonText)
                                 Circle()
                                     .fill(Color.white)
                                     .frame(width: 5, height: 5)
                             }
                             .foregroundColor(.white)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 8)
                             .background(Color.blue)
                             .clipShape(Capsule())
                         }
@@ -168,8 +168,8 @@ struct LoadedDashboardStateView: View {
                     dealerPerformance: data.dealerPerformance
                 )
             }
-            .padding(.horizontal, 14)
-            .padding(.top, 8)
+            .padding(.horizontal, CommonSpacing.pageMargin)
+            .padding(.top, 12)
             .padding(.bottom, 24)
         }
         .background(CommonColor.background)

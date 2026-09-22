@@ -16,9 +16,9 @@ public struct DashboardAlertSection: View {
         VStack(alignment: .leading, spacing: 6) {
             // Priority Header Line
             HStack {
-                Text("PRIORITY ALERTS")
-                    .font(.system(size: 11, weight: .bold))
-                    .foregroundColor(.secondary)
+                Text("Priority Alerts")
+                    .font(CommonFont.sectionHeading)
+                    .foregroundColor(.primary)
                 
                 Spacer()
                 
