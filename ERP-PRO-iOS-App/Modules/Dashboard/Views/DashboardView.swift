@@ -60,7 +60,7 @@ public struct DashboardView: View {
 
 final class DashboardHeaderViewState: ObservableObject {
     @Published var selectedPeriod: TimePeriodOption = .thisMonth
-    @Published var showingPeriodSheet: Bool = false
+    @Published var showingCustomRangeSheet: Bool = false
 }
 
 // MARK: - Loaded Content View
@@ -73,9 +73,9 @@ struct LoadedDashboardStateView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: CommonSpacing.sectionSpacing) {
-                // Header Area: Greeting & Business Overview
+                // Header Area: Greeting, Business Overview & Unified Filter Button
                 VStack(alignment: .leading, spacing: CommonSpacing.elementSpacing) {
-                    HStack(alignment: .top) {
+                    HStack(alignment: .center) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Good Morning,")
                                 .font(CommonFont.greetingSubtitle)
@@ -87,63 +87,59 @@ struct LoadedDashboardStateView: View {
                         }
 
                         Spacer()
-                    }
 
-                    // Filter Row Below Header
-                    HStack {
-                        // Month / Period Selection Button
-                        Button {
-                            headerViewState.showingPeriodSheet = true
-                        } label: {
-                            HStack(spacing: 4) {
-                                Text(headerViewState.selectedPeriod.title)
-                                    .font(CommonFont.secondaryText)
-                                    .foregroundColor(.primary)
-                                Image(systemName: "chevron.down")
-                                    .font(CommonFont.captionBadge)
-                                    .foregroundColor(.secondary)
+                        // Single Unified Filter Context Menu
+                        Menu {
+                            Picker("Time Period", selection: $headerViewState.selectedPeriod) {
+                                Text("Today").tag(TimePeriodOption.today)
+                                Text("This Week").tag(TimePeriodOption.thisWeek)
+                                Text("This Month").tag(TimePeriodOption.thisMonth)
+                                Text("This Quarter").tag(TimePeriodOption.thisQuarter)
+                                Text("This Year").tag(TimePeriodOption.thisYear)
                             }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(CommonColor.cardBackground)
-                            .clipShape(Capsule())
-                            .overlay(
-                                Capsule().stroke(CommonColor.border, lineWidth: 0.8)
-                            )
-                        }
-                        .sheet(isPresented: $headerViewState.showingPeriodSheet) {
-                            PeriodFilterSheet(
-                                selectedOption: $headerViewState.selectedPeriod,
-                                onSelect: { option in
-                                    Task {
-                                        await controller.fetchDashboardData()
-                                    }
+                            .pickerStyle(.inline)
+
+                            Divider()
+
+                            Button {
+                                headerViewState.showingCustomRangeSheet = true
+                            } label: {
+                                Label {
+                                    Text(headerViewState.selectedPeriod.isCustom ? headerViewState.selectedPeriod.title : "Custom Range...")
+                                } icon: {
+                                    Image(systemName: "calendar")
                                 }
-                            )
-                            .presentationDetents([.height(350)])
-                            .presentationCornerRadius(20)
-                        }
-
-                        Spacer()
-
-                        // Filter Pill Button
-                        Button {
-                            // Filter Action
+                            }
                         } label: {
                             HStack(spacing: 6) {
                                 Image(systemName: "slider.horizontal.3")
-                                    .font(CommonFont.buttonText)
-                                Text("Filter")
-                                    .font(CommonFont.buttonText)
-                                Circle()
-                                    .fill(Color.white)
-                                    .frame(width: 5, height: 5)
+                                    .font(.system(size: 13, weight: .semibold))
+                                Text(headerViewState.selectedPeriod.title)
+                                    .font(.system(size: 14, weight: .semibold))
+                                Image(systemName: "chevron.down")
+                                    .font(.system(size: 11, weight: .semibold))
                             }
                             .foregroundColor(.white)
                             .padding(.horizontal, 14)
                             .padding(.vertical, 8)
                             .background(Color.blue)
                             .clipShape(Capsule())
+                            .shadow(color: Color.blue.opacity(0.18), radius: 4, x: 0, y: 2)
+                        }
+                        .onChange(of: headerViewState.selectedPeriod) { _ in
+                            Task {
+                                await controller.fetchDashboardData()
+                            }
+                        }
+                        .sheet(isPresented: $headerViewState.showingCustomRangeSheet) {
+                            CustomDateRangeSheet(
+                                initialOption: headerViewState.selectedPeriod,
+                                onApply: { customOption in
+                                    headerViewState.selectedPeriod = customOption
+                                }
+                            )
+                            .presentationDetents([.height(320), .medium])
+                            .presentationCornerRadius(20)
                         }
                     }
                 }

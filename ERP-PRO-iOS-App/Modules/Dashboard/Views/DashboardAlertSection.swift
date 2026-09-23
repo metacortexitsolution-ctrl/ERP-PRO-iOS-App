@@ -7,41 +7,36 @@ import SwiftUI
 
 public struct DashboardAlertSection: View {
     let alerts: [AlertBannerItem]
+    var onAlertSelect: ((AlertBannerItem) -> Void)?
 
-    public init(alerts: [AlertBannerItem]) {
+    @State private var dismissedAlertIDs: Set<String> = []
+
+    public init(alerts: [AlertBannerItem], onAlertSelect: ((AlertBannerItem) -> Void)? = nil) {
         self.alerts = alerts
+        self.onAlertSelect = onAlertSelect
+    }
+
+    private var visibleAlerts: [AlertBannerItem] {
+        alerts.filter { !dismissedAlertIDs.contains($0.id) }
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.headingToCardSpacing) {
-            // Priority Header Line
-            HStack {
-                Text("Priority Alerts")
-                    .font(CommonFont.sectionHeading)
-                    .foregroundColor(.primary)
-                
-                Spacer()
-                
-                HStack(spacing: 3) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 9, weight: .bold))
-                    Text("Actionable")
-                        .font(.system(size: 11, weight: .semibold))
-                }
-                .foregroundColor(Color.red)
-                .padding(.horizontal, 7)
-                .padding(.vertical, 3)
-                .background(Color.red.opacity(0.12))
-                .clipShape(Capsule())
-            }
-            .padding(.horizontal, 2)
-
-            // Alert List Container
+        if !visibleAlerts.isEmpty {
             VStack(spacing: 0) {
-                ForEach(Array(alerts.enumerated()), id: \.element.id) { index, alert in
-                    AlertRowItem(alert: alert)
+                ForEach(Array(visibleAlerts.enumerated()), id: \.element.id) { index, alert in
+                    AlertRowItem(
+                        alert: alert,
+                        onDismiss: {
+                            withAnimation(.easeInOut(duration: 0.25)) {
+                                _ = dismissedAlertIDs.insert(alert.id)
+                            }
+                        },
+                        onSelect: {
+                            onAlertSelect?(alert)
+                        }
+                    )
                     
-                    if index < alerts.count - 1 {
+                    if index < visibleAlerts.count - 1 {
                         Divider()
                             .padding(.leading, 44)
                     }
@@ -76,42 +71,57 @@ public struct DashboardAlertSection: View {
 
 struct AlertRowItem: View {
     let alert: AlertBannerItem
+    let onDismiss: () -> Void
+    let onSelect: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
-            // Tinted Icon Circle
-            ZStack {
-                Circle()
-                    .fill(iconBackgroundColor)
-                    .frame(width: 28, height: 28)
+            // Main content area tap target (redirection to related data)
+            Button(action: onSelect) {
+                HStack(spacing: 12) {
+                    // Tinted Icon Circle
+                    ZStack {
+                        Circle()
+                            .fill(iconBackgroundColor)
+                            .frame(width: 28, height: 28)
 
-                Image(systemName: alert.iconName)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(iconForegroundColor)
-            }
+                        Image(systemName: alert.iconName)
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(iconForegroundColor)
+                    }
 
-            // Title & Subtitle
-            VStack(alignment: .leading, spacing: 2) {
-                Text(alert.title)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.primary)
+                    // Title & Subtitle
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(alert.title)
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(.primary)
 
-                if alert.severity == "danger" {
-                    Text(alert.subtitle)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(Color.red)
-                } else {
-                    Text(alert.subtitle)
-                        .font(.system(size: 12, weight: .regular))
-                        .foregroundColor(.secondary)
+                        if alert.severity == "danger" {
+                            Text(alert.subtitle)
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(Color.red)
+                        } else {
+                            Text(alert.subtitle)
+                                .font(.system(size: 12, weight: .regular))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
+                    Spacer()
                 }
+                .contentShape(Rectangle())
             }
+            .buttonStyle(.plain)
 
-            Spacer()
-
-            Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(Color(UIColor.tertiaryLabel))
+            // Close (X) button action
+            Button(action: onDismiss) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                    .padding(6)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
