@@ -59,8 +59,6 @@ public struct KeyMetricsGridSection: View {
                 id: "pending",
                 title: "Pending Payments",
                 amount: pending.formattedAmount,
-                titleBadge: pending.invoiceBadge,
-                titleBadgeColor: Color(red: 0.92, green: 0.48, blue: 0.05),
                 trendBadge: pending.trendText,
                 isPositiveTrend: pending.isPositiveTrend,
                 iconName: "wallet.pass.fill",
@@ -77,8 +75,6 @@ public struct KeyMetricsGridSection: View {
                 id: "orders",
                 title: "Orders Summary",
                 amount: orders.countText,
-                titleBadge: orders.pendingBadge,
-                titleBadgeColor: Color(red: 0.52, green: 0.25, blue: 0.9),
                 iconName: "clipboard.fill",
                 iconColor: Color(red: 0.52, green: 0.25, blue: 0.9),
                 iconBgColor: Color(red: 0.52, green: 0.25, blue: 0.9).opacity(0.12),
@@ -107,8 +103,6 @@ public struct KeyMetricsGridSection: View {
                 id: "customer",
                 title: "Customer Activity",
                 amount: cust.activeText,
-                titleBadge: cust.newBadge,
-                titleBadgeColor: Color(red: 0.1, green: 0.72, blue: 0.3),
                 iconName: "person.2.fill",
                 iconColor: Color(red: 0.1, green: 0.72, blue: 0.3),
                 iconBgColor: Color(red: 0.1, green: 0.72, blue: 0.3).opacity(0.15),
@@ -137,8 +131,6 @@ public struct KeyMetricsGridSection: View {
                 id: "business",
                 title: "Business Overview",
                 amount: biz.percentageText,
-                titleBadge: biz.targetBadge,
-                titleBadgeColor: Color(red: 0.95, green: 0.45, blue: 0.05),
                 iconName: "target",
                 iconColor: Color(red: 0.95, green: 0.45, blue: 0.05),
                 iconBgColor: Color(red: 0.95, green: 0.45, blue: 0.05).opacity(0.12),
@@ -217,26 +209,12 @@ struct MetricCompactCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            // Header Row: Title on Left, Optional Badge on Right
-            HStack(alignment: .center, spacing: 4) {
-                Text(card.title)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-
-                if let titleBadge = card.titleBadge {
-                    Spacer(minLength: 4)
-
-                    Text(titleBadge)
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundColor(card.titleBadgeColor)
-                        .padding(.horizontal, 7)
-                        .padding(.vertical, 3)
-                        .background(card.titleBadgeColor.opacity(0.12))
-                        .clipShape(Capsule())
-                }
-            }
+            // Header Row: Title Only
+            Text(card.title)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(.secondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
 
             Spacer(minLength: 4)
 
@@ -261,12 +239,12 @@ struct MetricCompactCard: View {
         .padding(12)
         .frame(maxWidth: .infinity, minHeight: 110, alignment: .topLeading)
         .background(CommonColor.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cardCornerRadius, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+            RoundedRectangle(cornerRadius: CommonSpacing.cardCornerRadius, style: .continuous)
+                .stroke(CommonColor.cardBorder, lineWidth: 0.8)
         )
-        .shadow(color: Color.black.opacity(0.04), radius: 5, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
     }
 }
 

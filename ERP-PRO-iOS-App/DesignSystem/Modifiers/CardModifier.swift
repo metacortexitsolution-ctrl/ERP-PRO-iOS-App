@@ -8,7 +8,7 @@ import SwiftUI
 public struct CardContainerModifier: ViewModifier {
     var cornerRadius: CGFloat
 
-    public init(cornerRadius: CGFloat = 12) {
+    public init(cornerRadius: CGFloat = CommonSpacing.cardCornerRadius) {
         self.cornerRadius = cornerRadius
     }
 
@@ -25,7 +25,7 @@ public struct CardContainerModifier: ViewModifier {
 }
 
 public extension View {
-    func cardContainer(cornerRadius: CGFloat = 12) -> some View {
+    func cardContainer(cornerRadius: CGFloat = CommonSpacing.cardCornerRadius) -> some View {
         self.modifier(CardContainerModifier(cornerRadius: cornerRadius))
     }
 }

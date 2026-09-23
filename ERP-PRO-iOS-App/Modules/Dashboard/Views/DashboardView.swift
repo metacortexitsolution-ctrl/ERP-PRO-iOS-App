@@ -170,7 +170,9 @@ struct LoadedDashboardStateView: View {
             }
             .padding(.horizontal, CommonSpacing.pageMargin)
             .padding(.top, 12)
-            .padding(.bottom, 24)
+            .padding(.bottom, DeviceInfo.isPad ? 32 : 56)
+            .frame(maxWidth: DeviceInfo.isPad ? 1040 : .infinity)
+            .frame(maxWidth: .infinity)
         }
         .background(CommonColor.background)
         .refreshable {

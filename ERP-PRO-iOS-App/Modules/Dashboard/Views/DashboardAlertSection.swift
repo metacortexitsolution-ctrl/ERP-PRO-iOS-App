@@ -13,7 +13,7 @@ public struct DashboardAlertSection: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: CommonSpacing.headingToCardSpacing) {
             // Priority Header Line
             HStack {
                 Text("Priority Alerts")
@@ -64,9 +64,9 @@ public struct DashboardAlertSection: View {
                 }
             }
             .background(CommonColor.cardBackground)
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cardCornerRadius, style: .continuous))
             .overlay(
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                RoundedRectangle(cornerRadius: CommonSpacing.cardCornerRadius, style: .continuous)
                     .stroke(CommonColor.cardBorder, lineWidth: 0.8)
             )
             .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)

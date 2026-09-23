@@ -6,42 +6,55 @@
 import SwiftUI
 
 public struct CommonFont {
-    // MARK: - Core System Typography Specification
-    /// 12 pt — captions, tiny metadata, badges
+    // MARK: - Core System Typography Specification (iOS / iPadOS)
+    
+    /// 12 pt — small metadata, captions, tiny badges
     public static let captionHelper = Font.system(size: 12, weight: .regular)
     public static let captionBadge = Font.system(size: 12, weight: .semibold)
     public static let sidebarBadge = Font.system(size: 12, weight: .semibold)
+    public static let smallMetadata = Font.system(size: 12, weight: .regular)
+    public static let statusBadge = Font.system(size: 12, weight: .semibold)
 
-    /// 13 pt — sidebar section headers, secondary metadata, company subtitle
+    /// 13–14 pt — secondary metadata, row subtitles, company subtitle
     public static let sidebarSectionHeader = Font.system(size: 13, weight: .semibold)
     public static let companySubtitle = Font.system(size: 13, weight: .regular)
-
-    /// 14 pt — secondary text, section labels
     public static let secondaryText = Font.system(size: 14, weight: .regular)
     public static let sectionLabel = Font.system(size: 14, weight: .bold)
 
-    /// 16 pt — body text, card content, form/input text, search text, button text
+    /// 16 pt — card titles, body text, form input text, button labels
     public static let bodyMain = Font.system(size: 16, weight: .regular)
-    public static let cardTitle = Font.system(size: 16, weight: .bold)
+    public static let cardTitle = Font.system(size: 16, weight: .semibold)
     public static let inputText = Font.system(size: 16, weight: .regular)
     public static let buttonText = Font.system(size: 16, weight: .semibold)
     public static let searchFieldText = Font.system(size: 16, weight: .regular)
 
-    /// 17 pt — sidebar menu items, company title, greeting subtitle
+    /// 18–20 pt — card primary values
+    public static let cardPrimaryValue = Font.system(size: 20, weight: .bold)
+
+    /// Section Heading — iPad: 22–24pt, iPhone: 21–23pt
+    public static var sectionHeading: Font {
+        Font.system(size: DeviceInfo.isPad ? 23 : 21, weight: .bold)
+    }
+
+    /// Page Title — iPad: 26–28pt, iPhone: 24–26pt
+    public static var dashboardTitle: Font {
+        Font.system(size: DeviceInfo.isPad ? 28 : 25, weight: .bold)
+    }
+
+    /// Main KPI Values (26–28pt)
+    public static let kpiValue = Font.system(size: 26, weight: .bold)
+
+    /// KPI Hero Value — iPad: 32–36pt, iPhone: 28–32pt
+    public static var kpiHeroValue: Font {
+        Font.system(size: DeviceInfo.isPad ? 34 : 30, weight: .bold)
+    }
+    public static var kpiLargeNumber: Font { kpiHeroValue }
+
+    /// Sidebar typography
     public static let sidebarMenuItem = Font.system(size: 17, weight: .regular)
     public static let sidebarMenuItemSelected = Font.system(size: 17, weight: .semibold)
     public static let companyTitle = Font.system(size: 17, weight: .semibold)
-    public static let greetingSubtitle = Font.system(size: 17, weight: .regular)
-
-    /// 20 pt — section headings
-    public static let sectionHeading = Font.system(size: 20, weight: .bold)
-
-    /// 28 pt — dashboard/page titles and main KPI values
-    public static let dashboardTitle = Font.system(size: 28, weight: .bold)
-    public static let kpiValue = Font.system(size: 28, weight: .bold)
-
-    /// 32 pt — large/high-priority KPI numbers
-    public static let kpiLargeNumber = Font.system(size: 32, weight: .bold)
+    public static let greetingSubtitle = Font.system(size: 15, weight: .regular)
 
     // MARK: - Compatibility Aliases & Helpers
     public static let sidebarIcon = Font.system(size: 20, weight: .regular)
