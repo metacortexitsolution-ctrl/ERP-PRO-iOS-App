@@ -161,26 +161,26 @@ public struct KeyMetricsGridSection: View {
             if !pages.isEmpty {
                 TabView(selection: $viewState.currentPage) {
                     ForEach(Array(pages.enumerated()), id: \.offset) { pageIndex, pageCards in
-                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
+                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
                             ForEach(pageCards) { card in
                                 MetricCompactCard(card: card)
                             }
                         }
                         .padding(.horizontal, 4)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 8)
                         .tag(pageIndex)
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 236)
+                .frame(height: 300)
 
                 if pages.count > 1 {
                     // Carousel Page Indicator Dots
                     HStack(spacing: 6) {
                         ForEach(0..<pages.count, id: \.self) { index in
                             Capsule()
-                                .fill(index == viewState.currentPage ? Color.blue : Color.gray.opacity(0.4))
-                                .frame(width: index == viewState.currentPage ? 16 : 5, height: 5)
+                                .fill(index == viewState.currentPage ? Color.blue : Color.gray.opacity(0.35))
+                                .frame(width: index == viewState.currentPage ? 18 : 6, height: 6)
                                 .animation(.easeInOut(duration: 0.2), value: viewState.currentPage)
                                 .onTapGesture {
                                     withAnimation {
@@ -189,8 +189,8 @@ public struct KeyMetricsGridSection: View {
                                 }
                         }
                     }
-                    .padding(.top, 4)
-                    .padding(.bottom, 4)
+                    .padding(.top, 6)
+                    .padding(.bottom, 2)
                 }
             }
         }
@@ -216,75 +216,57 @@ struct MetricCompactCard: View {
     let card: MetricCardData
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CommonSpacing.sm) {
-            // Header Row: Title, Optional Title Badge, and Circular Icon
-            HStack(alignment: .top, spacing: 4) {
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(card.title)
-                        .font(CommonFont.secondaryText)
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
+        VStack(alignment: .leading, spacing: 6) {
+            // Header Row: Title on Left, Optional Badge on Right
+            HStack(alignment: .center, spacing: 4) {
+                Text(card.title)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
 
-                    if let titleBadge = card.titleBadge {
-                        Text(titleBadge)
-                            .font(CommonFont.captionBadge)
-                            .foregroundColor(card.titleBadgeColor)
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 3)
-                            .background(card.titleBadgeColor.opacity(0.12))
-                            .clipShape(Capsule())
-                    }
-                }
+                if let titleBadge = card.titleBadge {
+                    Spacer(minLength: 4)
 
-                Spacer(minLength: 2)
-
-                ZStack {
-                    Circle()
-                        .fill(card.iconBgColor)
-                        .frame(width: 32, height: 32)
-
-                    Image(systemName: card.iconName)
-                        .font(CommonFont.bodyMain)
-                        .foregroundColor(card.iconColor)
+                    Text(titleBadge)
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundColor(card.titleBadgeColor)
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 3)
+                        .background(card.titleBadgeColor.opacity(0.12))
+                        .clipShape(Capsule())
                 }
             }
 
-            Spacer(minLength: 0)
+            Spacer(minLength: 4)
 
             // Amount Value
             Text(card.amount)
-                .font(CommonFont.kpiValue)
+                .font(.system(size: 25, weight: .bold))
                 .foregroundColor(.primary)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.75)
                 .lineLimit(1)
 
-            // Bottom Row: Trend Badge (Left) & Sparkline (Right)
-            HStack(alignment: .bottom) {
-                if let trendBadge = card.trendBadge {
-                    Text(trendBadge)
-                        .font(CommonFont.captionBadge)
-                        .foregroundColor(card.isPositiveTrend ? Color.green : Color.red)
-                        .padding(.horizontal, 7)
-                        .padding(.vertical, 3)
-                        .background((card.isPositiveTrend ? Color.green : Color.red).opacity(0.12))
-                        .clipShape(Capsule())
-                }
-
-                Spacer(minLength: 4)
-
-                SparklineView(data: card.sparklineData, color: card.sparklineColor)
-                    .frame(width: 52, height: 22)
+            // Bottom Row: Trend Badge (if present)
+            if let trendBadge = card.trendBadge {
+                Text(trendBadge)
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundColor(card.isPositiveTrend ? Color(red: 0.05, green: 0.65, blue: 0.3) : Color(red: 0.85, green: 0.2, blue: 0.2))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background((card.isPositiveTrend ? Color.green : Color.red).opacity(0.12))
+                    .clipShape(Capsule())
             }
         }
-        .padding(CommonSpacing.cardPadding)
+        .padding(12)
         .frame(maxWidth: .infinity, minHeight: 110, alignment: .topLeading)
         .background(CommonColor.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .stroke(Color.gray.opacity(0.25), lineWidth: CommonSpacing.dividerWidth)
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 1)
+        .shadow(color: Color.black.opacity(0.04), radius: 5, x: 0, y: 2)
     }
 }
 
