@@ -62,7 +62,10 @@ struct CompactInvoiceLayoutView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             VStack(spacing: 0) {
-                // Native Full-Width Search Bar directly below navigation bar
+                // Total Revenue Summary Header Card (Matching reference design)
+                InvoiceRevenueSummaryCard(controller: controller)
+
+                // Native Full-Width Search Bar below revenue card
                 HStack(spacing: 8) {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.secondary)
@@ -84,9 +87,6 @@ struct CompactInvoiceLayoutView: View {
                 .padding(.horizontal, CommonSpacing.pageMargin)
                 .padding(.top, 8)
                 .padding(.bottom, 8)
-
-                // Total Revenue Summary Header Card (Matching reference design)
-                InvoiceRevenueSummaryCard(controller: controller)
 
                 // Invoice List Content
                 if controller.filteredInvoices.isEmpty {
