@@ -99,7 +99,7 @@ public struct AppCoordinatorView: View {
         case .dashboard:
             DashboardView()
         case .invoice:
-            TabPlaceholderView(title: ConstantString.invoice, description: ConstantString.invoiceModulePlaceholder)
+            InvoiceListView()
         case .payment:
             TabPlaceholderView(title: ConstantString.payment, description: ConstantString.paymentModulePlaceholder)
         case .more:
@@ -115,7 +115,12 @@ public struct AppCoordinatorView: View {
         case .dashboard, .none:
             DashboardView()
         case .some(let dest):
-            TabPlaceholderView(title: dest.title, description: "\(dest.title) module & management")
+            switch dest {
+            case .invoices:
+                InvoiceListView()
+            default:
+                TabPlaceholderView(title: dest.title, description: "\(dest.title) module & management")
+            }
         }
     }
 }
