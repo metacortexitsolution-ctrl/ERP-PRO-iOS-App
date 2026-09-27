@@ -7,14 +7,6 @@ import Foundation
 import Combine
 import SwiftUI
 
-public enum InvoiceViewMode: String, CaseIterable, Identifiable {
-    case list
-    case grid
-    case table
-
-    public var id: String { rawValue }
-}
-
 public enum InvoiceSortField: String, CaseIterable, Identifiable {
     case date = "Date"
     case invoiceNumber = "Invoice #"
@@ -73,10 +65,9 @@ public final class InvoiceController: ObservableObject {
     @Published public private(set) var state: State = .loading
     @Published public var invoices: [Invoice] = []
     
-    // Search & Filter Bar State
+// Search & Filter Bar State
     @Published public var searchText: String = ""
     @Published public var selectedFilterChip: InvoiceFilterChip = .all
-    @Published public var selectedViewMode: InvoiceViewMode = .list
     @Published public var sortField: InvoiceSortField = .date
     @Published public var sortAscending: Bool = false
     
@@ -85,12 +76,9 @@ public final class InvoiceController: ObservableObject {
     @Published public var selectedInvoiceIDs: Set<String> = []
     @Published public var visibleOptionalColumns: Set<OptionalColumn> = [.salesperson, .currency, .poReference]
     @Published public var selectedInvoice: Invoice? = nil
-    @Published public var isShowingFilterInspector: Bool = false
     @Published public var isShowingNewInvoiceSheet: Bool = false
     @Published public var isShowingPDFPreview: Bool = false
-    @Published public var isShowingPrintSheet: Bool = false
     @Published public var isShowingThermalPrintSheet: Bool = false
-    @Published public var isShowingDocumentScanner: Bool = false
     
     // Advanced Floating Filter Popover State & Single Active Submenu
     @Published public var isFilterPopoverPresented: Bool = false

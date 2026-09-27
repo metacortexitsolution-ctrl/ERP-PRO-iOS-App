@@ -41,7 +41,7 @@ public struct InvoiceFilterView: View {
                     Image(systemName: "line.3.horizontal.decrease.circle.fill")
                         .foregroundColor(.blue)
                         .font(.system(size: 18))
-                    Text("Filters")
+                    Text(ConstantString.filters)
                         .font(.system(size: 16, weight: .bold))
                     
                     if controller.activeFilterCount > 0 {
@@ -63,7 +63,7 @@ public struct InvoiceFilterView: View {
                             controller.clearAllFilters()
                         }
                     }) {
-                        Text("Clear All")
+                        Text(ConstantString.clearAll)
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundColor(.red)
                     }
@@ -255,7 +255,7 @@ public struct InvoiceFilterView: View {
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.secondary)
                 Spacer()
-                Button(controller.selectedStatuses.count == InvoiceStatus.allCases.count ? "Deselect All" : "Select All") {
+                Button(controller.selectedStatuses.count == InvoiceStatus.allCases.count ? ConstantString.deselectAll : ConstantString.selectAll) {
                     if controller.selectedStatuses.count == InvoiceStatus.allCases.count {
                         controller.selectedStatuses.removeAll()
                     } else {
@@ -271,7 +271,7 @@ public struct InvoiceFilterView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
                     .font(.system(size: 13))
-                TextField("Search Status...", text: $statusSearchText)
+                TextField(ConstantString.searchStatusPlaceholder, text: $statusSearchText)
                     .font(.system(size: 13))
             }
             .padding(6)
@@ -556,7 +556,7 @@ public struct InvoiceFilterView: View {
                     .font(.system(size: 11, weight: .bold))
                     .foregroundColor(.secondary)
                 Spacer()
-                Button(controller.selectedCustomers.count == controller.allCustomerNames.count ? "Deselect All" : "Select All") {
+                Button(controller.selectedCustomers.count == controller.allCustomerNames.count ? ConstantString.deselectAll : ConstantString.selectAll) {
                     if controller.selectedCustomers.count == controller.allCustomerNames.count {
                         controller.selectedCustomers.removeAll()
                     } else {
@@ -571,7 +571,7 @@ public struct InvoiceFilterView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
                     .font(.system(size: 13))
-                TextField("Search Customer...", text: $customerSearchText)
+                TextField(ConstantString.searchCustomerPlaceholder, text: $customerSearchText)
                     .font(.system(size: 13))
             }
             .padding(6)

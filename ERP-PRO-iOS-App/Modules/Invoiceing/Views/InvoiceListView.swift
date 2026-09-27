@@ -114,7 +114,7 @@ struct KPIDashboardHeaderView: View {
 
     private var card1: some View {
         KPICard(
-            title: "TOTAL OUTSTANDING",
+            title: ConstantString.totalOutstanding,
             value: CommonCurrencyFormatter.format(controller.totalOutstandingAmount, currencyCode: "INR"),
             subtitle: "\(controller.totalOutstandingCount) Unpaid (\(controller.outstandingPercentageText))",
             icon: "exclamationmark.circle.fill",
@@ -124,7 +124,7 @@ struct KPIDashboardHeaderView: View {
 
     private var card2: some View {
         KPICard(
-            title: "OVERDUE AMOUNT",
+            title: ConstantString.overdueAmount,
             value: CommonCurrencyFormatter.format(controller.overdueAmount, currencyCode: "INR"),
             subtitle: "\(controller.overdueCount) Overdue",
             icon: "clock.badge.exclamationmark.fill",
@@ -135,7 +135,7 @@ struct KPIDashboardHeaderView: View {
 
     private var card3: some View {
         KPICard(
-            title: "DUE THIS WEEK",
+            title: ConstantString.dueThisWeek,
             value: CommonCurrencyFormatter.format(controller.dueThisWeekAmount, currencyCode: "INR"),
             subtitle: "\(controller.dueThisWeekCount) Dues in 7 days",
             icon: "calendar.badge.clock",
@@ -145,7 +145,7 @@ struct KPIDashboardHeaderView: View {
 
     private var card4: some View {
         KPICard(
-            title: "PAID THIS MONTH",
+            title: ConstantString.paidThisMonth,
             value: CommonCurrencyFormatter.format(controller.paidThisMonthAmount, currencyCode: "INR"),
             subtitle: "↑ \(String(format: "%.1f", controller.collectionRatePercentage))% rate",
             icon: "arrow.up.forward.circle.fill",
@@ -270,7 +270,7 @@ struct CompactInvoiceLayoutView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondary)
-                        TextField("Search Invoice ID, Customer, PO...", text: $controller.searchText)
+                        TextField(ConstantString.searchInvoicePlaceholder, text: $controller.searchText)
                             .font(CommonFont.body)
                             .autocorrectionDisabled()
                         if !controller.searchText.isEmpty {
@@ -339,13 +339,13 @@ struct CompactInvoiceLayoutView: View {
                     .padding(.bottom, 12)
             }
         }
-        .navigationTitle("Invoices")
+        .navigationTitle(ConstantString.invoices)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             if controller.isEditingMode {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: controller.toggleSelectAll) {
-                        Text(controller.selectedInvoiceIDs.count == controller.filteredInvoices.count && !controller.filteredInvoices.isEmpty ? "Deselect All" : "Select All")
+                        Text(controller.selectedInvoiceIDs.count == controller.filteredInvoices.count && !controller.filteredInvoices.isEmpty ? ConstantString.deselectAll : ConstantString.selectAll)
                             .font(CommonFont.subheadline)
                             .bold()
                     }
@@ -358,7 +358,7 @@ struct CompactInvoiceLayoutView: View {
                             controller.selectedInvoiceIDs.removeAll()
                         }
                     }) {
-                        Text("Done")
+                        Text(ConstantString.done)
                             .font(CommonFont.headline)
                     }
                 }
@@ -370,7 +370,7 @@ struct CompactInvoiceLayoutView: View {
                                 controller.isEditingMode = true
                             }
                         }) {
-                            Text("Edit")
+                            Text(ConstantString.edit)
                                 .font(CommonFont.subheadline)
                         }
 
@@ -470,7 +470,7 @@ struct WideInvoiceLayoutView: View {
                 HStack {
                     Image(systemName: "doc.text.fill")
                         .foregroundColor(.blue)
-                    Text("Accounts Receivable")
+                    Text(ConstantString.accountsReceivable)
                         .font(.system(size: 18, weight: .bold))
                     Spacer()
                 }
@@ -512,7 +512,7 @@ struct WideInvoiceLayoutView: View {
                 Divider()
 
                 Button(action: { controller.isShowingNewInvoiceSheet = true }) {
-                    Label("New Invoice", systemImage: "plus")
+                    Label(ConstantString.newInvoice, systemImage: "plus")
                         .font(CommonFont.headline)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
@@ -534,7 +534,7 @@ struct WideInvoiceLayoutView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondary)
-                        TextField("Search Invoice ID, Customer, PO...", text: $controller.searchText)
+                        TextField(ConstantString.searchInvoicePlaceholder, text: $controller.searchText)
                             .font(.system(size: 14))
                         if !controller.searchText.isEmpty {
                             Button(action: { controller.searchText = "" }) {
@@ -812,10 +812,10 @@ struct EmptyInvoiceStateView: View {
             Image(systemName: "doc.text.magnifyingglass")
                 .font(.system(size: 48))
                 .foregroundColor(.secondary)
-            Text("No Invoices Found")
+            Text(ConstantString.noInvoicesFound)
                 .font(CommonFont.title2)
                 .foregroundColor(.primary)
-            Text("Try adjusting your search query or status filter chips.")
+            Text(ConstantString.noInvoicesMessage)
                 .font(CommonFont.body)
                 .foregroundColor(.secondary)
         }

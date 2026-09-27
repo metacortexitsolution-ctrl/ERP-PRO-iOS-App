@@ -46,7 +46,7 @@ public struct InvoiceDetailView: View {
                         }
                         Spacer()
                         VStack(alignment: .trailing, spacing: 2) {
-                            Text("Total Billed")
+                            Text(ConstantString.totalBilled)
                                 .font(CommonFont.caption)
                                 .foregroundColor(.secondary)
                             Text(invoice.formattedTotal)
@@ -57,14 +57,14 @@ public struct InvoiceDetailView: View {
                     
                     HStack(spacing: 24) {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("ISSUE DATE")
+                            Text(ConstantString.issueDateCaps)
                                 .font(.system(size: 10, weight: .bold))
                                 .foregroundColor(.secondary)
                             Text(invoice.formattedIssueDate)
                                 .font(CommonFont.subheadline)
                         }
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("DUE DATE")
+                            Text(ConstantString.dueDateCaps)
                                 .font(.system(size: 10, weight: .bold))
                                 .foregroundColor(invoice.isOverdue ? .red : .secondary)
                             Text(invoice.formattedDueDate)
@@ -72,7 +72,7 @@ public struct InvoiceDetailView: View {
                                 .foregroundColor(invoice.isOverdue ? .red : .primary)
                         }
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("BALANCE DUE")
+                            Text(ConstantString.balanceDueCaps)
                                 .font(.system(size: 10, weight: .bold))
                                 .foregroundColor(.secondary)
                             Text(invoice.formattedBalanceDue)
@@ -89,7 +89,7 @@ public struct InvoiceDetailView: View {
                 // MARK: - Party Cards (Bill From, Bill To, Ship To)
                 VStack(spacing: 12) {
                     PartyCardView(
-                        title: "BILL FROM",
+                        title: ConstantString.billFrom,
                         icon: "building.2.fill",
                         name: invoice.companyName,
                         address: "Corporate Towers, 12th Floor, Bandra Kurla Complex, Mumbai, MH 400051",
@@ -99,7 +99,7 @@ public struct InvoiceDetailView: View {
                     )
                     
                     PartyCardView(
-                        title: "BILL TO",
+                        title: ConstantString.billTo,
                         icon: "person.crop.square.fill",
                         name: invoice.customerName,
                         address: invoice.billingAddress ?? "Address not provided",
@@ -110,7 +110,7 @@ public struct InvoiceDetailView: View {
                     
                     if let shipAddr = invoice.shippingAddress, !shipAddr.isEmpty {
                         PartyCardView(
-                            title: "SHIP TO",
+                            title: ConstantString.shipTo,
                             icon: "shippingbox.fill",
                             name: invoice.customerName,
                             address: shipAddr,
@@ -123,14 +123,14 @@ public struct InvoiceDetailView: View {
                 
                 // MARK: - Metadata Summary Cards
                 HStack(spacing: 12) {
-                    MetadataBoxView(title: "PAYMENT TERMS", value: invoice.paymentTerms, icon: "calendar")
-                    MetadataBoxView(title: "PO REFERENCE", value: invoice.poReference ?? "N/A", icon: "doc.plaintext")
-                    MetadataBoxView(title: "SALESPERSON", value: invoice.salesperson ?? "Unassigned", icon: "person.fill")
+                    MetadataBoxView(title: ConstantString.paymentTermsCaps, value: invoice.paymentTerms, icon: "calendar")
+                    MetadataBoxView(title: ConstantString.poReferenceCaps, value: invoice.poReference ?? "N/A", icon: "doc.plaintext")
+                    MetadataBoxView(title: ConstantString.salespersonCaps, value: invoice.salesperson ?? "Unassigned", icon: "person.fill")
                 }
                 
                 // MARK: - Itemized Breakdown Table
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("ITEMIZED BREAKDOWN")
+                    Text(ConstantString.itemizedBreakdown)
                         .font(.system(size: 11, weight: .bold))
                         .foregroundColor(.secondary)
                     
