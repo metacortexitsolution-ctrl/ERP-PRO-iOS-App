@@ -14,8 +14,12 @@ public struct CommonCurrencyFormatter {
         return fmt
     }()
     
-    public static func format(_ amount: Double?) -> String {
+    public static func format(_ amount: Double?, currencyCode: String? = nil) -> String {
         guard let amount = amount else { return "₹0" }
+        if let code = currencyCode, code != "INR" {
+            let symbol = code == "USD" ? "$" : (code == "EUR" ? "€" : "\(code) ")
+            return "\(symbol)\(Int(amount))"
+        }
         return formatter.string(from: NSNumber(value: amount)) ?? "₹\(Int(amount))"
     }
 }

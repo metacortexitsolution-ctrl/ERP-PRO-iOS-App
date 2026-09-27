@@ -143,8 +143,8 @@ public struct KeyMetricsGridSection: View {
     }
 
     private var pages: [[MetricCardData]] {
-        stride(from: 0, to: cardItems.count, by: 4).map {
-            Array(cardItems[$0..<min($0 + 4, cardItems.count)])
+        stride(from: 0, to: cardItems.count, by: 2).map {
+            Array(cardItems[$0..<min($0 + 2, cardItems.count)])
         }
     }
 
@@ -153,9 +153,10 @@ public struct KeyMetricsGridSection: View {
             if !pages.isEmpty {
                 TabView(selection: $viewState.currentPage) {
                     ForEach(Array(pages.enumerated()), id: \.offset) { pageIndex, pageCards in
-                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
+                        HStack(spacing: 12) {
                             ForEach(pageCards) { card in
                                 MetricCompactCard(card: card)
+                                    .frame(maxWidth: .infinity)
                             }
                         }
                         .padding(.horizontal, 4)
@@ -164,7 +165,7 @@ public struct KeyMetricsGridSection: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 300)
+                .frame(height: 140)
 
                 if pages.count > 1 {
                     // Carousel Page Indicator Dots

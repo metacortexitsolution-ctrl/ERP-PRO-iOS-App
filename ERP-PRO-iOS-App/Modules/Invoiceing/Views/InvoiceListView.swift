@@ -4,8 +4,9 @@
 //
 
 import SwiftUI
+import PDFKit
 
-/// Main Invoice List view supporting iPhone card view, iPad multi-column table view, and Mac Catalyst table/grid views.
+/// Main Accounts Receivable & Invoice management view supporting iPhone card list, iPad multi-column table view, and Mac Catalyst navigation split inspector.
 public struct InvoiceListView: View {
     @StateObject private var controller = InvoiceController()
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -20,7 +21,7 @@ public struct InvoiceListView: View {
         Group {
             switch controller.state {
             case .loading:
-                ProgressView("Loading Invoices...")
+                ProgressView("Loading Invoices & Accounts Receivable...")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             case .loaded, .empty:
                 if isWideLayout {
@@ -51,313 +52,226 @@ public struct InvoiceListView: View {
         .task {
             await controller.fetchInvoices()
         }
+        .sheet(isPresented: $controller.isShowingNewInvoiceSheet) {
+            NewInvoiceSheetView()
+        }
+        .sheet(isPresented: $controller.isShowingPDFPreview) {
+            if let inv = controller.selectedInvoice ?? controller.invoices.first {
+                InvoicePDFPreviewView(invoice: inv)
+            }
+        }
+        .sheet(isPresented: $controller.isShowingThermalPrintSheet) {
+            if let inv = controller.selectedInvoice ?? controller.invoices.first {
+                InvoiceThermalPrintView(invoice: inv)
+            }
+        }
     }
 }
 
-// MARK: - iPhone / Compact Screen Layout
+// MARK: - 4 KPI Summary Cards Header Component
+
+struct KPIDashboardHeaderView: View {
+    @ObservedObject var controller: InvoiceController
+    @State private var currentPage: Int = 0
+
+    var body: some View {
+        VStack(spacing: 6) {
+            TabView(selection: $currentPage) {
+                // Page 0: First 2 KPI Cards
+                HStack(spacing: 10) {
+                    card1.frame(maxWidth: .infinity, minHeight: 104, maxHeight: 104)
+                    card2.frame(maxWidth: .infinity, minHeight: 104, maxHeight: 104)
+                }
+                .padding(.horizontal, CommonSpacing.pageMargin)
+                .tag(0)
+
+                // Page 1: Second 2 KPI Cards
+                HStack(spacing: 10) {
+                    card3.frame(maxWidth: .infinity, minHeight: 104, maxHeight: 104)
+                    card4.frame(maxWidth: .infinity, minHeight: 104, maxHeight: 104)
+                }
+                .padding(.horizontal, CommonSpacing.pageMargin)
+                .tag(1)
+            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .frame(height: 108)
+
+            // Page Indicator Dots
+            HStack(spacing: 6) {
+                Capsule()
+                    .fill(currentPage == 0 ? Color.blue : Color.gray.opacity(0.35))
+                    .frame(width: currentPage == 0 ? 16 : 6, height: 6)
+                    .animation(.easeInOut(duration: 0.2), value: currentPage)
+
+                Capsule()
+                    .fill(currentPage == 1 ? Color.blue : Color.gray.opacity(0.35))
+                    .frame(width: currentPage == 1 ? 16 : 6, height: 6)
+                    .animation(.easeInOut(duration: 0.2), value: currentPage)
+            }
+        }
+        .padding(.vertical, 6)
+    }
+
+    private var card1: some View {
+        KPICard(
+            title: "TOTAL OUTSTANDING",
+            value: CommonCurrencyFormatter.format(controller.totalOutstandingAmount, currencyCode: "INR"),
+            subtitle: "\(controller.totalOutstandingCount) Unpaid (\(controller.outstandingPercentageText))",
+            icon: "exclamationmark.circle.fill",
+            accentColor: .orange
+        )
+    }
+
+    private var card2: some View {
+        KPICard(
+            title: "OVERDUE AMOUNT",
+            value: CommonCurrencyFormatter.format(controller.overdueAmount, currencyCode: "INR"),
+            subtitle: "\(controller.overdueCount) Overdue",
+            icon: "clock.badge.exclamationmark.fill",
+            accentColor: controller.overdueAmount > 0 ? .red : .gray,
+            isWarning: controller.overdueAmount > 0
+        )
+    }
+
+    private var card3: some View {
+        KPICard(
+            title: "DUE THIS WEEK",
+            value: CommonCurrencyFormatter.format(controller.dueThisWeekAmount, currencyCode: "INR"),
+            subtitle: "\(controller.dueThisWeekCount) Dues in 7 days",
+            icon: "calendar.badge.clock",
+            accentColor: .blue
+        )
+    }
+
+    private var card4: some View {
+        KPICard(
+            title: "PAID THIS MONTH",
+            value: CommonCurrencyFormatter.format(controller.paidThisMonthAmount, currencyCode: "INR"),
+            subtitle: "↑ \(String(format: "%.1f", controller.collectionRatePercentage))% rate",
+            icon: "arrow.up.forward.circle.fill",
+            accentColor: .green,
+            badgeText: "↑ \(String(format: "%.1f", controller.collectionRatePercentage))%"
+        )
+    }
+}
+
+struct KPICard: View {
+    let title: String
+    let value: String
+    let subtitle: String
+    let icon: String
+    let accentColor: Color
+    var isWarning: Bool = false
+    var badgeText: String? = nil
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            // Header Row: Title Only (Icon removed)
+            Text(title)
+                .font(.system(size: 11, weight: .bold))
+                .foregroundColor(isWarning ? .red : .secondary)
+                .lineLimit(1)
+
+            Spacer(minLength: 2)
+
+            // Primary Amount Value
+            Text(value)
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(isWarning ? .red : .primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+
+            // Bottom Subtitle Badge
+            HStack {
+                Text(subtitle)
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundColor(isWarning ? .red : .secondary)
+                    .lineLimit(1)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(isWarning ? Color.red.opacity(0.12) : Color(uiColor: .tertiarySystemFill))
+                    .clipShape(Capsule())
+
+                Spacer()
+            }
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(CommonColor.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: CommonSpacing.cardCornerRadius, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: CommonSpacing.cardCornerRadius, style: .continuous)
+                .stroke(isWarning ? Color.red.opacity(0.3) : CommonColor.cardBorder, lineWidth: 0.8)
+        )
+        .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
+    }
+}
+
+// MARK: - 19 Status Segmented Filter Bar
+
+struct StatusSegmentedFilterBar: View {
+    @ObservedObject var controller: InvoiceController
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(InvoiceFilterChip.allCases) { chip in
+                    let count = controller.countForFilterChip(chip)
+                    let isSelected = controller.selectedFilterChip == chip
+
+                    Button(action: {
+                        withAnimation(.spring(response: 0.25, dampingFraction: 0.8)) {
+                            controller.selectedFilterChip = chip
+                        }
+                    }) {
+                        HStack(spacing: 6) {
+                            Text(chip.rawValue)
+                                .font(.system(size: 13, weight: isSelected ? .bold : .medium))
+
+                            Text("\(count)")
+                                .font(.system(size: 11, weight: .bold))
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(isSelected ? Color.white.opacity(0.3) : Color(uiColor: .tertiarySystemFill))
+                                .foregroundColor(isSelected ? .white : .secondary)
+                                .clipShape(Capsule())
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(isSelected ? Color.blue : Color(uiColor: .secondarySystemBackground))
+                        .foregroundColor(isSelected ? .white : .primary)
+                        .cornerRadius(12)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, CommonSpacing.pageMargin)
+            .padding(.vertical, 6)
+        }
+    }
+}
+
+// MARK: - iPhone / Compact Layout View
 
 struct CompactInvoiceLayoutView: View {
     @ObservedObject var controller: InvoiceController
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        ZStack(alignment: .bottom) {
             VStack(spacing: 0) {
-                // Total Revenue Summary Header Card (Matching reference design)
-                InvoiceRevenueSummaryCard(controller: controller)
+                // 1. KPI Cards Header (2x2 grid on iPhone)
+                KPIDashboardHeaderView(controller: controller)
 
-                // Native Full-Width Search Bar below revenue card
+                // 2. 19 Status Filter Bar
+                StatusSegmentedFilterBar(controller: controller)
+
+                // 3. Search & Sort Bar
                 HStack(spacing: 8) {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.secondary)
-                        .font(.system(size: 16))
-                    TextField("Search", text: $controller.searchText)
-                        .font(CommonFont.body)
-                        .autocorrectionDisabled()
-                    if !controller.searchText.isEmpty {
-                        Button(action: { controller.searchText = "" }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 8)
-                .background(Color(uiColor: .tertiarySystemFill))
-                .cornerRadius(10)
-                .padding(.horizontal, CommonSpacing.pageMargin)
-                .padding(.top, 8)
-                .padding(.bottom, 8)
-
-                // Invoice List Content
-                if controller.filteredInvoices.isEmpty {
-                    EmptyInvoiceStateView()
-                } else {
-                    ScrollView {
-                        LazyVStack(spacing: 12) {
-                            ForEach(controller.filteredInvoices) { item in
-                                CompactInvoiceRowCard(item: item)
-                            }
-                        }
-                        .padding(.horizontal, CommonSpacing.pageMargin)
-                        .padding(.top, 12)
-                        .padding(.bottom, 84)
-                    }
-                }
-            }
-
-            // Bottom-Right Floating Action Button (+ New Invoice)
-            Button(action: { controller.isShowingNewInvoiceSheet = true }) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16, style: .continuous)
-                        .fill(Color.blue)
-                        .frame(width: 52, height: 52)
-                        .shadow(color: Color.blue.opacity(0.35), radius: 8, x: 0, y: 4)
-                    Image(systemName: "plus")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.white)
-                }
-            }
-            .padding(.trailing, 20)
-            .padding(.bottom, 20)
-        }
-        .background(Color(uiColor: .systemBackground))
-        .navigationTitle("Invoices")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                HStack(spacing: 8) {
-                    // Sort Button (Circular light button)
-                    Menu {
-                        Picker("Sort By", selection: $controller.sortField) {
-                            Text("Date").tag(InvoiceSortField.date)
-                            Text("Invoice No.").tag(InvoiceSortField.invoiceNumber)
-                            Text("Customer").tag(InvoiceSortField.customerName)
-                            Text("Amount").tag(InvoiceSortField.amount)
-                        }
-                        Button(action: controller.toggleSortOrder) {
-                            Label(controller.sortAscending ? "Ascending" : "Descending", systemImage: controller.sortAscending ? "arrow.up" : "arrow.down")
-                        }
-                    } label: {
-                        ZStack {
-                            Circle()
-                                .stroke(Color(uiColor: .systemGray4), lineWidth: 1)
-                                .background(Circle().fill(Color(uiColor: .systemBackground)))
-                                .frame(width: 36, height: 36)
-                            Image(systemName: "arrow.up.arrow.down")
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(.primary)
-                        }
-                    }
-
-                    // Filter Button (Circular light button with blue funnel icon)
-                    Menu {
-                        Picker("Filter", selection: $controller.selectedFilter) {
-                            ForEach(InvoiceFilterOption.allCases) { option in
-                                Text(option.title).tag(option)
-                            }
-                        }
-                    } label: {
-                        ZStack {
-                            Circle()
-                                .stroke(Color(uiColor: .systemGray4), lineWidth: 1)
-                                .background(Circle().fill(Color(uiColor: .systemBackground)))
-                                .frame(width: 36, height: 36)
-                            Image(systemName: "funnel.fill")
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
-            }
-        }
-        .sheet(isPresented: $controller.isShowingNewInvoiceSheet) {
-            NewInvoiceSheetView()
-        }
-    }
-}
-
-// MARK: - Revenue Summary Card Component
-
-struct InvoiceRevenueSummaryCard: View {
-    @ObservedObject var controller: InvoiceController
-
-    var body: some View {
-        HStack(alignment: .center) {
-            // Left Info: TOTAL REVENUE & Invoice Count
-            VStack(alignment: .leading, spacing: 3) {
-                Text("TOTAL REVENUE")
-                    .font(.system(size: 11, weight: .bold))
-                    .foregroundColor(Color(uiColor: .secondaryLabel))
-
-                Text(controller.totalInvoicesCountText)
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundColor(Color(uiColor: .secondaryLabel))
-            }
-            .frame(minWidth: 90, alignment: .leading)
-
-            Spacer()
-
-            // Center Pill Capsule: Amount
-            Text(controller.totalRevenueText)
-                .font(.system(size: 16, weight: .bold))
-                .foregroundColor(Color.blue)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(Color.blue.opacity(0.14))
-                .clipShape(Capsule())
-
-            Spacer()
-
-            // Right Info: Time Period
-            Text(controller.revenuePeriodText)
-                .font(.system(size: 11, weight: .bold))
-                .foregroundColor(Color(uiColor: .secondaryLabel))
-                .frame(minWidth: 90, alignment: .trailing)
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(Color(red: 0.94, green: 0.94, blue: 0.97))
-    }
-}
-
-// MARK: - Compact Invoice Row Card
-
-struct CompactInvoiceRowCard: View {
-    let item: InvoiceItem
-
-    var body: some View {
-        HStack(spacing: 14) {
-            // Left Document Icon Container
-            ZStack {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(Color(uiColor: .systemGray6))
-                    .frame(width: 48, height: 48)
-                Image(systemName: "doc.text")
-                    .font(.system(size: 20, weight: .regular))
-                    .foregroundColor(.secondary)
-            }
-
-            // Middle Details Column
-            VStack(alignment: .leading, spacing: 3) {
-                Text(item.invoiceNumber)
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(.primary)
-
-                Text(item.customerName)
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundColor(.secondary)
-
-                Text(item.date)
-                    .font(.system(size: 12, weight: .regular))
-                    .foregroundColor(Color(uiColor: .tertiaryLabel))
-            }
-
-            Spacer(minLength: 8)
-
-            // Right Amount & Status Column
-            VStack(alignment: .trailing, spacing: 6) {
-                Text(item.formattedAmount)
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(.primary)
-
-                InvoiceStatusBadge(status: item.status)
-            }
-
-            // Right Chevron Arrow
-            Image(systemName: "chevron.right")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundColor(Color(uiColor: .tertiaryLabel))
-                .padding(.leading, 2)
-        }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 14)
-        .background(Color(uiColor: .secondarySystemGroupedBackground))
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.03), radius: 6, x: 0, y: 2)
-    }
-}
-
-// MARK: - iPad / Mac Wide Layout
-
-struct WideInvoiceLayoutView: View {
-    @ObservedObject var controller: InvoiceController
-
-    var body: some View {
-        HStack(spacing: 0) {
-            // Filter Sidebar Panel (iPad / Mac left navigation)
-            VStack(alignment: .leading, spacing: 16) {
-                // Header Label
-                HStack {
-                    Image(systemName: "doc.text.fill")
-                        .foregroundColor(.blue)
-                        .font(.system(size: 18))
-                    Text("Invoices")
-                        .font(.system(size: 18, weight: .bold))
-                    Spacer()
-                }
-                .padding(.horizontal, 16)
-                .padding(.top, 20)
-
-                // Category Items
-                VStack(spacing: 4) {
-                    ForEach(InvoiceFilterOption.allCases) { option in
-                        Button(action: { controller.selectedFilter = option }) {
-                            HStack(spacing: 12) {
-                                Image(systemName: option.iconName)
-                                    .font(.system(size: 15))
-                                    .frame(width: 20)
-                                Text(option.title)
-                                    .font(.system(size: 14, weight: controller.selectedFilter == option ? .semibold : .regular))
-                                Spacer()
-                            }
-                            .foregroundColor(controller.selectedFilter == option ? .blue : .primary)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 9)
-                            .background(controller.selectedFilter == option ? Color.blue.opacity(0.12) : Color.clear)
-                            .cornerRadius(10)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.horizontal, 8)
-
-                Spacer()
-
-                // Bottom Action: + New Invoice
-                Button(action: { controller.isShowingNewInvoiceSheet = true }) {
-                    HStack(spacing: 8) {
-                        Image(systemName: "plus")
-                            .font(.system(size: 14, weight: .bold))
-                        Text("New Invoice")
-                            .font(.system(size: 14, weight: .semibold))
-                        Spacer()
-                    }
-                    .foregroundColor(.blue)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                }
-                .padding(.bottom, 16)
-            }
-            .frame(width: 240)
-            .background(Color(uiColor: .secondarySystemBackground))
-
-            Divider()
-
-            // Main Details Content Area
-            VStack(spacing: 0) {
-                // Top Header Toolbar
-                HStack(spacing: 14) {
-                    Text("Invoices")
-                        .font(.system(size: 22, weight: .bold))
-
-                    Spacer()
-
-                    // Native Search Input Box
                     HStack(spacing: 8) {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondary)
-                        TextField("Search", text: $controller.searchText)
-                            .font(.system(size: 14))
+                        TextField("Search Invoice ID, Customer, PO...", text: $controller.searchText)
+                            .font(CommonFont.body)
                             .autocorrectionDisabled()
                         if !controller.searchText.isEmpty {
                             Button(action: { controller.searchText = "" }) {
@@ -366,215 +280,507 @@ struct WideInvoiceLayoutView: View {
                             }
                         }
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
+                    .padding(8)
                     .background(Color(uiColor: .tertiarySystemFill))
                     .cornerRadius(10)
-                    .frame(width: 240)
 
-                    // Filter Context Menu
+                    Button(action: {
+                        withAnimation {
+                            controller.isFilterPopoverPresented.toggle()
+                        }
+                    }) {
+                        ZStack {
+                            Circle()
+                                .stroke(Color(uiColor: .systemGray4), lineWidth: 1)
+                                .background(Circle().fill(controller.activeFilterCount > 0 ? Color.blue.opacity(0.15) : Color(uiColor: .systemBackground)))
+                                .frame(width: 36, height: 36)
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(controller.activeFilterCount > 0 ? .blue : .primary)
+                        }
+                    }
+                    .popover(isPresented: $controller.isFilterPopoverPresented, arrowEdge: .top) {
+                        InvoiceFilterView(controller: controller)
+                    }
+                }
+                .padding(.horizontal, CommonSpacing.pageMargin)
+                .padding(.vertical, 6)
+
+                // 4. Invoices List / Card View
+                if controller.filteredInvoices.isEmpty {
+                    EmptyInvoiceStateView()
+                } else {
+                    List {
+                        ForEach(controller.filteredInvoices) { item in
+                            if controller.isEditingMode {
+                                CompactInvoiceCardRow(item: item, controller: controller)
+                                    .listRowSeparator(.hidden)
+                                    .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                            } else {
+                                ZStack {
+                                    CompactInvoiceCardRow(item: item, controller: controller)
+                                    NavigationLink(destination: InvoiceDetailView(controller: controller, invoice: item)) {
+                                        EmptyView()
+                                    }
+                                    .opacity(0)
+                                }
+                                .listRowSeparator(.hidden)
+                                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                            }
+                        }
+                    }
+                    .listStyle(.plain)
+                }
+            }
+
+            // Floating Bulk Toolbar when 1+ selected
+            if !controller.selectedInvoiceIDs.isEmpty {
+                BulkActionToolbarView(controller: controller)
+                    .padding(.bottom, 12)
+            }
+        }
+        .navigationTitle("Invoices")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if controller.isEditingMode {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: controller.toggleSelectAll) {
+                        Text(controller.selectedInvoiceIDs.count == controller.filteredInvoices.count && !controller.filteredInvoices.isEmpty ? "Deselect All" : "Select All")
+                            .font(CommonFont.subheadline)
+                            .bold()
+                    }
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        withAnimation {
+                            controller.isEditingMode = false
+                            controller.selectedInvoiceIDs.removeAll()
+                        }
+                    }) {
+                        Text("Done")
+                            .font(CommonFont.headline)
+                    }
+                }
+            } else {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack(spacing: 12) {
+                        Button(action: {
+                            withAnimation {
+                                controller.isEditingMode = true
+                            }
+                        }) {
+                            Text("Edit")
+                                .font(CommonFont.subheadline)
+                        }
+
+                        Button(action: { controller.isShowingNewInvoiceSheet = true }) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 16, weight: .bold))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - iPhone Card Row Component
+
+struct CompactInvoiceCardRow: View {
+    let item: Invoice
+    @ObservedObject var controller: InvoiceController
+
+    var isSelected: Bool {
+        controller.selectedInvoiceIDs.contains(item.invoiceId)
+    }
+
+    var body: some View {
+        HStack(spacing: 12) {
+            if controller.isEditingMode {
+                Button(action: { controller.toggleSelection(item.invoiceId) }) {
+                    Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                        .foregroundColor(isSelected ? .blue : .secondary)
+                        .font(.system(size: 20))
+                }
+                .buttonStyle(.plain)
+            }
+
+            // Customer Avatar
+            ZStack {
+                Circle()
+                    .fill(Color.blue.opacity(0.12))
+                    .frame(width: 44, height: 44)
+                Text(item.customerInitials)
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.blue)
+            }
+
+            // Middle Column (Invoice ID, Customer Name, Due Date)
+            VStack(alignment: .leading, spacing: 3) {
+                Text(item.invoiceId)
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.primary)
+
+                Text(item.customerName)
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+
+                Text("Due: \(item.formattedDueDate)")
+                    .font(.system(size: 11))
+                    .foregroundColor(item.isOverdue ? .red : .secondary)
+            }
+
+            Spacer()
+
+            // Right Column (Status Badge above amount, Total Amount, Balance Due)
+            VStack(alignment: .trailing, spacing: 4) {
+                InvoiceStatusBadge(status: item.status)
+
+                Text(item.formattedTotal)
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.primary)
+
+                Text("Bal: \(item.formattedBalanceDue)")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(item.balanceDue > 0 ? .orange : .green)
+            }
+        }
+        .padding(12)
+        .background(Color(uiColor: .secondarySystemGroupedBackground))
+        .cornerRadius(14)
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(isSelected ? Color.blue : Color.clear, lineWidth: 1.5)
+        )
+    }
+}
+
+// MARK: - iPadOS & Mac Catalyst Wide Layout View
+
+struct WideInvoiceLayoutView: View {
+    @ObservedObject var controller: InvoiceController
+
+    var body: some View {
+        NavigationSplitView {
+            // Sidebar List of Filters & Statuses
+            VStack(alignment: .leading, spacing: 0) {
+                // Header
+                HStack {
+                    Image(systemName: "doc.text.fill")
+                        .foregroundColor(.blue)
+                    Text("Accounts Receivable")
+                        .font(.system(size: 18, weight: .bold))
+                    Spacer()
+                }
+                .padding()
+
+                Divider()
+
+                // Status Chips List
+                ScrollView {
+                    VStack(spacing: 4) {
+                        ForEach(InvoiceFilterChip.allCases) { chip in
+                            let count = controller.countForFilterChip(chip)
+                            let isSelected = controller.selectedFilterChip == chip
+
+                            Button(action: { controller.selectedFilterChip = chip }) {
+                                HStack {
+                                    Text(chip.rawValue)
+                                        .font(.system(size: 14, weight: isSelected ? .bold : .regular))
+                                    Spacer()
+                                    Text("\(count)")
+                                        .font(.system(size: 12, weight: .bold))
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 2)
+                                        .background(isSelected ? Color.white.opacity(0.3) : Color(uiColor: .tertiarySystemFill))
+                                        .clipShape(Capsule())
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                                .background(isSelected ? Color.blue : Color.clear)
+                                .foregroundColor(isSelected ? .white : .primary)
+                                .cornerRadius(10)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(8)
+                }
+
+                Divider()
+
+                Button(action: { controller.isShowingNewInvoiceSheet = true }) {
+                    Label("New Invoice", systemImage: "plus")
+                        .font(CommonFont.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding()
+            }
+            .navigationSplitViewColumnWidth(min: 240, ideal: 260, max: 300)
+        } content: {
+            // Center Column: Table & KPI Dashboard
+            VStack(spacing: 0) {
+                // KPI Summary Cards
+                KPIDashboardHeaderView(controller: controller)
+
+                Divider()
+
+                // Search & Column Toggle Toolbar
+                HStack(spacing: 12) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.secondary)
+                        TextField("Search Invoice ID, Customer, PO...", text: $controller.searchText)
+                            .font(.system(size: 14))
+                        if !controller.searchText.isEmpty {
+                            Button(action: { controller.searchText = "" }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                    .padding(8)
+                    .background(Color(uiColor: .tertiarySystemFill))
+                    .cornerRadius(10)
+                    .frame(maxWidth: 320)
+
+                    Spacer()
+
+                    // Optional Column Selection Menu
+                    Menu {
+                        Text("Show/Hide Columns")
+                            .font(CommonFont.caption)
+                        ForEach(OptionalColumn.allCases) { col in
+                            Button(action: {
+                                if controller.visibleOptionalColumns.contains(col) {
+                                    controller.visibleOptionalColumns.remove(col)
+                                } else {
+                                    controller.visibleOptionalColumns.insert(col)
+                                }
+                            }) {
+                                Label(col.rawValue, systemImage: controller.visibleOptionalColumns.contains(col) ? "checkmark" : "")
+                            }
+                        }
+                    } label: {
+                        Label("Columns", systemImage: "slider.horizontal.3")
+                            .font(CommonFont.subheadline)
+                    }
+
+                    // Sort Menu
                     Menu {
                         Picker("Sort By", selection: $controller.sortField) {
-                            Text("Date").tag(InvoiceSortField.date)
-                            Text("Invoice No.").tag(InvoiceSortField.invoiceNumber)
-                            Text("Customer").tag(InvoiceSortField.customerName)
-                            Text("Amount").tag(InvoiceSortField.amount)
+                            ForEach(InvoiceSortField.allCases) { f in
+                                Text(f.rawValue).tag(f)
+                            }
                         }
                         Button(action: controller.toggleSortOrder) {
                             Label(controller.sortAscending ? "Ascending" : "Descending", systemImage: controller.sortAscending ? "arrow.up" : "arrow.down")
                         }
                     } label: {
-                        Image(systemName: "slider.horizontal.3")
-                            .font(.system(size: 15, weight: .medium))
-                            .foregroundColor(.secondary)
-                            .padding(9)
-                            .background(Color(uiColor: .tertiarySystemFill))
-                            .cornerRadius(8)
+                        Image(systemName: "arrow.up.arrow.down")
+                            .font(.system(size: 14, weight: .semibold))
                     }
 
-                    // View Mode Switcher (List vs Grid on Mac)
-                    if DeviceInfo.isMacCatalyst || DeviceInfo.isPad {
-                        HStack(spacing: 2) {
-                            Button(action: { controller.selectedViewMode = .list }) {
-                                Image(systemName: "list.bullet")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(controller.selectedViewMode == .list ? .primary : .secondary)
-                                    .padding(7)
-                                    .background(controller.selectedViewMode == .list ? Color(uiColor: .systemGray5) : Color.clear)
-                                    .cornerRadius(6)
-                            }
-                            Button(action: { controller.selectedViewMode = .grid }) {
-                                Image(systemName: "square.grid.2x2")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(controller.selectedViewMode == .grid ? .primary : .secondary)
-                                    .padding(7)
-                                    .background(controller.selectedViewMode == .grid ? Color(uiColor: .systemGray5) : Color.clear)
-                                    .cornerRadius(6)
-                            }
+                    Button(action: {
+                        withAnimation {
+                            controller.isFilterPopoverPresented.toggle()
                         }
-                        .padding(2)
-                        .background(Color(uiColor: .tertiarySystemFill))
-                        .cornerRadius(8)
+                    }) {
+                        Image(systemName: "funnel")
+                            .foregroundColor(controller.activeFilterCount > 0 ? .blue : .primary)
                     }
-
-                    // Plus Action Button
-                    Button(action: { controller.isShowingNewInvoiceSheet = true }) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.blue)
-                                .frame(width: 30, height: 30)
-                            Image(systemName: "plus")
-                                .font(.system(size: 15, weight: .bold))
-                                .foregroundColor(.white)
-                        }
+                    .popover(isPresented: $controller.isFilterPopoverPresented, arrowEdge: .top) {
+                        InvoiceFilterView(controller: controller)
                     }
                 }
-                .padding(.horizontal, 24)
-                .padding(.vertical, 14)
-                .background(Color(uiColor: .systemBackground))
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(Color(uiColor: .secondarySystemBackground))
 
                 Divider()
 
-                // Total Revenue Summary Card for Wide View
-                InvoiceRevenueSummaryCard(controller: controller)
-
-                Divider()
-
-                // Table or Grid View Content
+                // Multi-Column Data Table View
                 if controller.filteredInvoices.isEmpty {
                     EmptyInvoiceStateView()
-                } else if controller.selectedViewMode == .grid {
-                    ScrollView {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 280), spacing: 16)], spacing: 16) {
-                            ForEach(controller.filteredInvoices) { item in
-                                CompactInvoiceRowCard(item: item)
-                            }
-                        }
-                        .padding(24)
-                    }
-                    .background(Color(uiColor: .systemBackground))
                 } else {
-                    // Multi-Column Table View
-                    VStack(spacing: 0) {
-                        // Header Columns
-                        HStack(spacing: 12) {
-                            Text("")
-                                .frame(width: 28)
-                            Text("Invoice No.")
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.secondary)
-                                .frame(width: 140, alignment: .leading)
-                            Text("Customer")
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.secondary)
-                                .frame(minWidth: 140, alignment: .leading)
-                            Button(action: controller.toggleSortOrder) {
-                                HStack(spacing: 4) {
-                                    Text("Date")
-                                        .font(.system(size: 12, weight: .semibold))
-                                        .foregroundColor(.secondary)
-                                    Image(systemName: controller.sortAscending ? "arrow.up" : "arrow.down")
-                                        .font(.system(size: 11, weight: .semibold))
-                                        .foregroundColor(.secondary)
-                                }
+                    Table(controller.filteredInvoices, selection: $controller.selectedInvoiceIDs) {
+                        TableColumn("Invoice ID") { inv in
+                            HStack {
+                                Text(inv.invoiceId)
+                                    .font(.system(size: 13, weight: .bold))
+                                Spacer()
                             }
-                            .buttonStyle(.plain)
-                            .frame(width: 120, alignment: .leading)
-                            Text("Status")
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.secondary)
-                                .frame(width: 100, alignment: .center)
-                            Spacer()
-                            Text("Amount")
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.secondary)
-                                .frame(width: 110, alignment: .trailing)
-                            Text("")
-                                .frame(width: 20)
                         }
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 10)
-                        .background(Color(uiColor: .secondarySystemBackground))
+                        .width(min: 120, ideal: 140)
 
-                        Divider()
-
-                        // Scrollable Rows
-                        ScrollView {
-                            LazyVStack(spacing: 0) {
-                                ForEach(controller.filteredInvoices) { item in
-                                    WideInvoiceTableRow(item: item)
-                                    Divider()
-                                        .padding(.leading, 64)
-                                }
+                        TableColumn("Customer") { inv in
+                            HStack(spacing: 8) {
+                                Circle()
+                                    .fill(Color.blue.opacity(0.12))
+                                    .frame(width: 24, height: 24)
+                                    .overlay(Text(inv.customerInitials).font(.system(size: 10, weight: .bold)).foregroundColor(.blue))
+                                Text(inv.customerName)
+                                    .font(.system(size: 13))
                             }
+                        }
+                        .width(min: 160, ideal: 200)
+
+                        TableColumn("Issue Date") { inv in
+                            Text(inv.formattedIssueDate)
+                                .font(.system(size: 12))
+                        }
+                        .width(min: 90, ideal: 110)
+
+                        TableColumn("Due Date") { inv in
+                            Text(inv.formattedDueDate)
+                                .font(.system(size: 12))
+                                .foregroundColor(inv.isOverdue ? .red : .primary)
+                        }
+                        .width(min: 90, ideal: 110)
+
+                        TableColumn("Status") { inv in
+                            Menu {
+                                ForEach(InvoiceStatus.allCases) { st in
+                                    Button(st.rawValue) {
+                                        controller.updateStatus(for: inv, newStatus: st)
+                                    }
+                                }
+                            } label: {
+                                InvoiceStatusBadge(status: inv.status)
+                            }
+                        }
+                        .width(min: 110, ideal: 130)
+
+                        TableColumn("Total") { inv in
+                            Text(inv.formattedTotal)
+                                .font(.system(size: 13, weight: .bold))
+                        }
+                        .width(min: 100, ideal: 120)
+
+                        TableColumn("Balance") { inv in
+                            Text(inv.formattedBalanceDue)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(inv.balanceDue > 0 ? .orange : .green)
+                        }
+                        .width(min: 100, ideal: 120)
+
+                        TableColumn("Salesperson") { inv in
+                            Text(inv.salesperson ?? "-")
+                                .font(.system(size: 12))
+                        }
+                        .width(min: 100, ideal: 120)
+
+                        TableColumn("PO #") { inv in
+                            Text(inv.poReference ?? "-")
+                                .font(.system(size: 12))
+                        }
+                        .width(min: 90, ideal: 110)
+                    }
+                    .onChange(of: controller.selectedInvoiceIDs) { _, newSelection in
+                        if let firstID = newSelection.first, let found = controller.invoices.first(where: { $0.invoiceId == firstID }) {
+                            controller.selectedInvoice = found
                         }
                     }
-                    .background(Color(uiColor: .systemBackground))
+                }
+
+                // Bulk Action Floating Toolbar
+                if !controller.selectedInvoiceIDs.isEmpty {
+                    BulkActionToolbarView(controller: controller)
+                        .padding(.bottom, 12)
                 }
             }
-        }
-        .sheet(isPresented: $controller.isShowingNewInvoiceSheet) {
-            NewInvoiceSheetView()
+            .navigationSplitViewColumnWidth(min: 500, ideal: 680)
+        } detail: {
+            // 3rd Column: Detail Inspector Panel
+            if let selected = controller.selectedInvoice ?? controller.filteredInvoices.first {
+                InvoiceDetailView(controller: controller, invoice: selected)
+            } else {
+                VStack(spacing: 12) {
+                    Image(systemName: "doc.text")
+                        .font(.system(size: 48))
+                        .foregroundColor(.secondary)
+                    Text("Select an invoice to inspect details")
+                        .font(CommonFont.title2)
+                        .foregroundColor(.secondary)
+                }
+            }
         }
     }
 }
 
-// MARK: - Table Row Component for iPad / Mac Table Layout
+// MARK: - Multi-Select Bulk Action Toolbar Component
 
-struct WideInvoiceTableRow: View {
-    let item: InvoiceItem
+struct BulkActionToolbarView: View {
+    @ObservedObject var controller: InvoiceController
 
     var body: some View {
-        HStack(spacing: 12) {
-            // Doc icon
-            Image(systemName: "doc.text")
-                .font(.system(size: 16))
-                .foregroundColor(.secondary)
-                .frame(width: 28)
+        HStack(spacing: 16) {
+            Text("\(controller.selectedInvoiceIDs.count) selected")
+                .font(.system(size: 13, weight: .bold))
+                .foregroundColor(.white)
 
-            // Invoice No.
-            Text(item.invoiceNumber)
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(.primary)
-                .frame(width: 140, alignment: .leading)
+            Divider()
+                .frame(height: 20)
+                .background(Color.white.opacity(0.4))
 
-            // Customer
-            Text(item.customerName)
-                .font(.system(size: 14, weight: .regular))
-                .foregroundColor(.primary)
-                .frame(minWidth: 140, alignment: .leading)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    Button(action: {
+                        controller.bulkUpdateStatus(newStatus: .sent)
+                    }) {
+                        Label("Send Email", systemImage: "paperplane.fill")
+                    }
 
-            // Date
-            Text(item.date)
-                .font(.system(size: 13, weight: .regular))
-                .foregroundColor(.secondary)
-                .frame(width: 120, alignment: .leading)
+                    Button(action: {
+                        controller.bulkUpdateStatus(newStatus: .sent)
+                    }) {
+                        Label("Send Reminder", systemImage: "bell.fill")
+                    }
 
-            // Status
-            HStack {
-                Spacer()
-                InvoiceStatusBadge(status: item.status)
-                Spacer()
-            }
-            .frame(width: 100)
+                    Button(action: {
+                        controller.isShowingPDFPreview = true
+                    }) {
+                        Label("Export PDF", systemImage: "square.and.arrow.up")
+                    }
 
-            Spacer()
+                    Button(action: {
+                        controller.bulkUpdateStatus(newStatus: .paid)
+                    }) {
+                        Label("Mark Paid", systemImage: "checkmark.circle.fill")
+                    }
 
-            // Amount
-            Text(item.formattedAmount)
-                .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.primary)
-                .frame(width: 110, alignment: .trailing)
+                    Button(action: {
+                        controller.bulkUpdateStatus(newStatus: .archived)
+                    }) {
+                        Label("Archive", systemImage: "archivebox.fill")
+                    }
 
-            // Chevron
-            Image(systemName: "chevron.right")
+                    Button(action: {
+                        controller.bulkDelete()
+                    }) {
+                        Label("Delete", systemImage: "trash.fill")
+                            .foregroundColor(.red)
+                    }
+                }
                 .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(Color(uiColor: .tertiaryLabel))
-                .frame(width: 20)
+                .foregroundColor(.white)
+            }
+
+            Button(action: { controller.selectedInvoiceIDs.removeAll() }) {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.white.opacity(0.7))
+            }
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(Color.black.opacity(0.85))
+        .cornerRadius(30)
+        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
         .padding(.horizontal, 24)
-        .padding(.vertical, 14)
-        .contentShape(Rectangle())
     }
 }
 
@@ -584,17 +790,21 @@ struct InvoiceStatusBadge: View {
     let status: InvoiceStatus
 
     var body: some View {
-        Text(status.rawValue)
-            .font(.system(size: 12, weight: .bold))
-            .foregroundColor(status.badgeTextColor)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 4)
-            .background(status.badgeBackgroundColor)
-            .clipShape(Capsule())
+        HStack(spacing: 4) {
+            Image(systemName: status.iconName)
+                .font(.system(size: 10))
+            Text(status.rawValue)
+                .font(.system(size: 11, weight: .bold))
+        }
+        .foregroundColor(status.badgeTextColor)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(status.badgeBackgroundColor)
+        .clipShape(Capsule())
     }
 }
 
-// MARK: - Empty State View
+// MARK: - Empty State View Component
 
 struct EmptyInvoiceStateView: View {
     var body: some View {
@@ -605,7 +815,7 @@ struct EmptyInvoiceStateView: View {
             Text("No Invoices Found")
                 .font(CommonFont.title2)
                 .foregroundColor(.primary)
-            Text("Try adjusting your search query or filter options.")
+            Text("Try adjusting your search query or status filter chips.")
                 .font(CommonFont.body)
                 .foregroundColor(.secondary)
         }
@@ -614,34 +824,37 @@ struct EmptyInvoiceStateView: View {
     }
 }
 
-// MARK: - New Invoice Sheet Placeholder
+// MARK: - New Invoice Sheet Placeholder View
 
 struct NewInvoiceSheetView: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var customerName: String = ""
+    @State private var totalAmountText: String = ""
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Image(systemName: "doc.badge.plus")
-                    .font(.system(size: 56))
-                    .foregroundColor(.blue)
-                Text("New Invoice Creation")
-                    .font(CommonFont.title2)
-                Text("This action opens the new invoice builder workflow.")
-                    .font(CommonFont.body)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
+        NavigationStack {
+            Form {
+                Section("Customer Details") {
+                    TextField("Customer Name", text: $customerName)
+                }
+
+                Section("Invoice Total") {
+                    TextField("Total Amount (₹)", text: $totalAmountText)
+                        .keyboardType(.decimalPad)
+                }
             }
-            .navigationTitle("New Invoice")
+            .navigationTitle("New Invoice Builder")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        dismiss()
-                    }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") { dismiss() }
+                        .font(CommonFont.headline)
                 }
             }
         }
     }
 }
+
