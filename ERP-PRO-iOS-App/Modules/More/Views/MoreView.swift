@@ -58,6 +58,9 @@ public struct MoreView: View {
         .background(CommonColor.background)
         .navigationTitle("More")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(for: SidebarDestination.self) { destination in
+            AppCoordinatorView.destinationView(for: destination)
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack(spacing: 12) {
@@ -150,7 +153,14 @@ struct MoreSectionView: View {
                     spacing: 10
                 ) {
                     ForEach(gridItems) { item in
-                        MoreModuleCard(item: item)
+                        if let dest = item.destination {
+                            NavigationLink(value: dest) {
+                                MoreModuleCard(item: item)
+                            }
+                            .buttonStyle(.plain)
+                        } else {
+                            MoreModuleCard(item: item)
+                        }
                     }
                 }
             }
@@ -159,7 +169,14 @@ struct MoreSectionView: View {
             if !fullWidthItems.isEmpty {
                 VStack(spacing: 10) {
                     ForEach(fullWidthItems) { item in
-                        MoreModuleCard(item: item)
+                        if let dest = item.destination {
+                            NavigationLink(value: dest) {
+                                MoreModuleCard(item: item)
+                            }
+                            .buttonStyle(.plain)
+                        } else {
+                            MoreModuleCard(item: item)
+                        }
                     }
                 }
             }
