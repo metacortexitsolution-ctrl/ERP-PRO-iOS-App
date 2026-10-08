@@ -99,7 +99,7 @@ public struct AppCoordinatorView: View {
         case .dashboard:
             DashboardView()
         case .invoice:
-            InvoiceListView()
+            SalesDocumentListView(documentType: .invoice)
         case .payment:
             TabPlaceholderView(title: ConstantString.payment, description: ConstantString.paymentModulePlaceholder)
         case .more:
@@ -117,9 +117,15 @@ public struct AppCoordinatorView: View {
         case .some(let dest):
             switch dest {
             case .invoices:
-                InvoiceListView()
+                SalesDocumentListView(documentType: .invoice)
             case .orders:
-                SalesOrderListView()
+                SalesDocumentListView(documentType: .salesOrder)
+            case .estimates:
+                SalesDocumentListView(documentType: .estimate)
+            case .challans:
+                SalesDocumentListView(documentType: .deliveryChallan)
+            case .creditNotes:
+                SalesDocumentListView(documentType: .creditNote)
             default:
                 TabPlaceholderView(title: dest.title, description: "\(dest.title) module & management")
             }

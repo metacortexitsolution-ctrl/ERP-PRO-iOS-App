@@ -11,6 +11,9 @@ import SwiftUI
 public enum SalesDocumentType: String, Codable, CaseIterable, Identifiable, Hashable {
     case invoice = "Invoice"
     case salesOrder = "Sales Order"
+    case estimate = "Quotation"
+    case deliveryChallan = "Delivery Challan"
+    case creditNote = "Credit Note"
 
     public var id: String { rawValue }
 
@@ -18,6 +21,9 @@ public enum SalesDocumentType: String, Codable, CaseIterable, Identifiable, Hash
         switch self {
         case .invoice: return "Invoices"
         case .salesOrder: return "Sales Orders"
+        case .estimate: return "Quotations & Estimates"
+        case .deliveryChallan: return "Delivery Challans"
+        case .creditNote: return "Credit Notes"
         }
     }
 
@@ -25,6 +31,9 @@ public enum SalesDocumentType: String, Codable, CaseIterable, Identifiable, Hash
         switch self {
         case .invoice: return "New Invoice"
         case .salesOrder: return "New Sales Order"
+        case .estimate: return "New Quotation"
+        case .deliveryChallan: return "New Delivery Challan"
+        case .creditNote: return "New Credit Note"
         }
     }
 
@@ -32,6 +41,9 @@ public enum SalesDocumentType: String, Codable, CaseIterable, Identifiable, Hash
         switch self {
         case .invoice: return "doc.text.fill"
         case .salesOrder: return "cart.fill"
+        case .estimate: return "doc.text"
+        case .deliveryChallan: return "truck.box"
+        case .creditNote: return "doc.badge.plus"
         }
     }
 }

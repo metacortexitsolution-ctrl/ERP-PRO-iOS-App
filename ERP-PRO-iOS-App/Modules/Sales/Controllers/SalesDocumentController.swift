@@ -298,7 +298,8 @@ public final class SalesDocumentController: ObservableObject {
         let now = Date()
         let day: TimeInterval = 86400
 
-        if type == .invoice {
+        switch type {
+        case .invoice:
             let inv1 = SalesDocument(
                 documentId: "INV-2026-001",
                 documentType: .invoice,
@@ -344,7 +345,8 @@ public final class SalesDocumentController: ObservableObject {
                 secondaryAmount: 354000.0
             )
             return [inv1, inv2, inv3]
-        } else {
+
+        case .salesOrder:
             let so1 = SalesDocument(
                 documentId: "SO-2026-001",
                 documentType: .salesOrder,
@@ -389,6 +391,75 @@ public final class SalesDocumentController: ObservableObject {
                 secondaryAmount: 88000.0
             )
             return [so1, so2, so3]
+
+        case .estimate:
+            let est1 = SalesDocument(
+                documentId: "EST-2026-101",
+                documentType: .estimate,
+                customerName: "Initech Solutions",
+                primaryDate: now.addingTimeInterval(-day * 4),
+                secondaryDate: now.addingTimeInterval(day * 26),
+                status: .sent,
+                currency: "INR",
+                salesperson: "Rajesh Kumar",
+                totalAmount: 490000.0,
+                secondaryAmount: 490000.0
+            )
+            let est2 = SalesDocument(
+                documentId: "EST-2026-102",
+                documentType: .estimate,
+                customerName: "Umbrella Corp",
+                primaryDate: now.addingTimeInterval(-day * 2),
+                secondaryDate: now.addingTimeInterval(day * 28),
+                status: .draft,
+                currency: "INR",
+                salesperson: "Anita Desai",
+                totalAmount: 185000.0,
+                secondaryAmount: 185000.0
+            )
+            return [est1, est2]
+
+        case .deliveryChallan:
+            let dc1 = SalesDocument(
+                documentId: "DC-2026-301",
+                documentType: .deliveryChallan,
+                customerName: "Acme Industrial Corp",
+                primaryDate: now.addingTimeInterval(-day * 6),
+                secondaryDate: now.addingTimeInterval(-day * 1),
+                status: .delivered,
+                currency: "INR",
+                salesperson: "Vikram Malhotra",
+                totalAmount: 120000.0,
+                secondaryAmount: 0.0
+            )
+            let dc2 = SalesDocument(
+                documentId: "DC-2026-302",
+                documentType: .deliveryChallan,
+                customerName: "Globex Logistics Systems",
+                primaryDate: now.addingTimeInterval(-day * 1),
+                secondaryDate: now.addingTimeInterval(day * 2),
+                status: .partiallyDelivered,
+                currency: "INR",
+                salesperson: "Rajesh Kumar",
+                totalAmount: 75000.0,
+                secondaryAmount: 35000.0
+            )
+            return [dc1, dc2]
+
+        case .creditNote:
+            let cn1 = SalesDocument(
+                documentId: "CN-2026-501",
+                documentType: .creditNote,
+                customerName: "Soylent Pharmaceuticals",
+                primaryDate: now.addingTimeInterval(-day * 10),
+                secondaryDate: now.addingTimeInterval(-day * 10),
+                status: .approved,
+                currency: "INR",
+                salesperson: "Anita Desai",
+                totalAmount: 35000.0,
+                secondaryAmount: 0.0
+            )
+            return [cn1]
         }
     }
 }
