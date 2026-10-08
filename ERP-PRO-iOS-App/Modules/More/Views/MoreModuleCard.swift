@@ -7,22 +7,31 @@ import SwiftUI
 
 public struct MoreModuleCard: View {
     let item: MoreModuleItem
-    let action: () -> Void
+    let action: (() -> Void)?
 
-    public init(item: MoreModuleItem, action: @escaping () -> Void = {}) {
+    public init(item: MoreModuleItem, action: (() -> Void)? = nil) {
         self.item = item
         self.action = action
     }
 
     public var body: some View {
-        Button(action: action) {
-            if item.isFullWidth {
-                fullWidthLayout
-            } else {
-                gridLayout
+        if let action = action {
+            Button(action: action) {
+                cardContent
             }
+            .buttonStyle(PlainButtonStyle())
+        } else {
+            cardContent
         }
-        .buttonStyle(PlainButtonStyle())
+    }
+
+    @ViewBuilder
+    private var cardContent: some View {
+        if item.isFullWidth {
+            fullWidthLayout
+        } else {
+            gridLayout
+        }
     }
 
     // MARK: - 2-Column Grid Layout

@@ -69,6 +69,9 @@ public struct AppCoordinatorView: View {
                 ForEach(AppTab.allCases) { tab in
                     NavigationStack {
                         tabContentView(for: tab)
+                            .navigationDestination(for: SidebarDestination.self) { destination in
+                                AppCoordinatorView.destinationView(for: destination)
+                            }
                     }
                     .tabItem {
                         Label(tab.title, systemImage: tab.iconName)
@@ -94,6 +97,33 @@ public struct AppCoordinatorView: View {
         case .settings:
             TabPlaceholderView(title: ConstantString.settings, description: ConstantString.settingsModulePlaceholder)
         }
+    }
+    @ViewBuilder
+    public static func destinationView(for destination: SidebarDestination?) -> some View {
+        switch destination {
+        case .dashboard, .none:
+            DashboardView()
+        case .some(let dest):
+            switch dest {
+            case .invoices:
+                SalesDocumentListView(documentType: .invoice)
+            case .orders:
+                SalesDocumentListView(documentType: .salesOrder)
+            case .estimates:
+                SalesDocumentListView(documentType: .estimate)
+            case .challans:
+                SalesDocumentListView(documentType: .deliveryChallan)
+            case .creditNotes:
+                SalesDocumentListView(documentType: .creditNote)
+            default:
+                TabPlaceholderView(title: dest.title, description: "\(dest.title) module & management")
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func sidebarContentView(for destination: SidebarDestination?) -> some View {
+        AppCoordinatorView.destinationView(for: destination)
     }
 }
 
