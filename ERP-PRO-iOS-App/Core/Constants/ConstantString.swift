@@ -166,4 +166,17 @@ public struct ConstantString {
     public static let poReferenceCaps = "PO REFERENCE"
     public static let salespersonCaps = "SALESPERSON"
     public static let branchCaps = "BRANCH"
+
+    // MARK: - Sales Orders
+    public static let salesOrders = "Sales Orders"
+    public static let newSalesOrder = "New Sales Order"
+    public static let totalSalesVolume = "Total Sales Volume"
+    public static let pendingUnfulfilled = "Pending Unfulfilled"
+    public static let fulfilledThisMonth = "Fulfilled This Month"
+    public static let searchSalesOrderPlaceholder = "Search Order #, Customer, Salesperson, PO #"
+    public static let noSalesOrdersFound = "No Sales Orders Found"
+    public static let noSalesOrdersMessage = "There are no sales orders matching your search or filter criteria."
+    public static let convertToInvoice = "Convert to Invoice"
+    public static let viewPDF = "View PDF"
 }
+

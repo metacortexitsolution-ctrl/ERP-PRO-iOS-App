@@ -5,12 +5,10 @@
 
 import Foundation
 import SwiftUI
-import SwiftData
 
-// MARK: - SwiftData Line Item Model
+// MARK: - Invoice Line Item Model
 
-@Model
-public final class InvoiceItem: Identifiable {
+public struct InvoiceItem: Identifiable, Codable, Hashable {
     public var id: String
     public var name: String
     public var itemDescription: String?
@@ -26,7 +24,7 @@ public final class InvoiceItem: Identifiable {
     public var igstAmount: Double?
     public var amount: Double
     public var unit: String
-    
+
     public init(
         id: String = UUID().uuidString,
         name: String,
@@ -58,16 +56,15 @@ public final class InvoiceItem: Identifiable {
     }
 }
 
-// MARK: - SwiftData Payment Record Model
+// MARK: - Invoice Payment Record Model
 
-@Model
-public final class InvoicePayment: Identifiable {
+public struct InvoicePayment: Identifiable, Codable, Hashable {
     public var id: String
     public var date: Date
     public var method: String
     public var amount: Double
     public var referenceNumber: String?
-    
+
     public init(
         id: String = UUID().uuidString,
         date: Date = Date(),
@@ -85,7 +82,7 @@ public final class InvoicePayment: Identifiable {
 
 // MARK: - Invoice Lifecycle Status
 
-public enum InvoiceStatus: String, Codable, CaseIterable, Identifiable {
+public enum InvoiceStatus: String, Codable, CaseIterable, Identifiable, Hashable {
     case draft = "Draft"
     case pendingApproval = "Pending Approval"
     case approved = "Approved"
@@ -104,9 +101,9 @@ public enum InvoiceStatus: String, Codable, CaseIterable, Identifiable {
     case scheduled = "Scheduled"
     case expired = "Expired"
     case archived = "Archived"
-    
+
     public var id: String { rawValue }
-    
+
     public var badgeTextColor: Color {
         switch self {
         case .paid, .approved:
@@ -121,7 +118,7 @@ public enum InvoiceStatus: String, Codable, CaseIterable, Identifiable {
             return Color(red: 0.4, green: 0.4, blue: 0.45)
         }
     }
-    
+
     public var badgeBackgroundColor: Color {
         switch self {
         case .paid, .approved:
@@ -136,7 +133,7 @@ public enum InvoiceStatus: String, Codable, CaseIterable, Identifiable {
             return Color(uiColor: .systemGray5)
         }
     }
-    
+
     public var iconName: String {
         switch self {
         case .draft: return "square.and.pencil"
@@ -183,9 +180,9 @@ public enum InvoiceFilterChip: String, CaseIterable, Identifiable, Hashable {
     case scheduled = "Scheduled"
     case expired = "Expired"
     case archived = "Archived"
-    
+
     public var id: String { rawValue }
-    
+
     public var statusValue: InvoiceStatus? {
         InvoiceStatus(rawValue: rawValue)
     }
@@ -193,7 +190,7 @@ public enum InvoiceFilterChip: String, CaseIterable, Identifiable, Hashable {
 
 // MARK: - Advanced Filter Presets & Options
 
-public enum DateRangePreset: String, CaseIterable, Identifiable {
+public enum DateRangePreset: String, CaseIterable, Identifiable, Hashable {
     case today = "Today"
     case yesterday = "Yesterday"
     case thisWeek = "This Week"
@@ -202,27 +199,27 @@ public enum DateRangePreset: String, CaseIterable, Identifiable {
     case lastMonth = "Last Month"
     case thisQuarter = "This Quarter"
     case thisYear = "This Year"
-    
+
     public var id: String { rawValue }
 }
 
-public enum PaymentStatusFilter: String, CaseIterable, Identifiable {
+public enum PaymentStatusFilter: String, CaseIterable, Identifiable, Hashable {
     case all = "All"
     case paid = "Paid"
     case partial = "Partial"
     case unpaid = "Unpaid"
-    
+
     public var id: String { rawValue }
 }
 
-public enum AmountQuickRange: String, CaseIterable, Identifiable {
+public enum AmountQuickRange: String, CaseIterable, Identifiable, Hashable {
     case under25k = "<₹25K"
     case range25k100k = "₹25K–₹1L"
     case range100k500k = "₹1L–₹5L"
     case above500k = ">₹5L"
-    
+
     public var id: String { rawValue }
-    
+
     public var minMax: (Double?, Double?) {
         switch self {
         case .under25k: return (0, 25000)
@@ -233,7 +230,7 @@ public enum AmountQuickRange: String, CaseIterable, Identifiable {
     }
 }
 
-public enum OptionalColumn: String, CaseIterable, Identifiable {
+public enum OptionalColumn: String, CaseIterable, Identifiable, Hashable {
     case salesperson = "Salesperson"
     case currency = "Currency"
     case paymentMethod = "Payment Method"
@@ -244,27 +241,26 @@ public enum OptionalColumn: String, CaseIterable, Identifiable {
     case lastUpdated = "Last Updated"
     case referenceNo = "Reference #"
     case poReference = "PO #"
-    
+
     public var id: String { rawValue }
 }
 
-// MARK: - SwiftData Main Invoice Model
+// MARK: - Main Invoice Model
 
-@Model
-public final class Invoice: Identifiable {
-    @Attribute(.unique) public var invoiceId: String
+public struct Invoice: Identifiable, Codable, Hashable {
     public var id: String { invoiceId }
+    public var invoiceId: String
     public var customerName: String
     public var customerEmail: String?
     public var customerPhone: String?
     public var gstin: String?
     public var billingAddress: String?
     public var shippingAddress: String?
-    
+
     public var issueDate: Date
     public var dueDate: Date
-    public var statusRaw: String
-    
+    public var status: InvoiceStatus
+
     public var subtotalAmount: Double
     public var discountAmount: Double
     public var taxAmount: Double
@@ -272,7 +268,7 @@ public final class Invoice: Identifiable {
     public var totalAmount: Double
     public var paidAmount: Double
     public var balanceDue: Double
-    
+
     public var currency: String
     public var companyName: String
     public var paymentTerms: String
@@ -284,19 +280,14 @@ public final class Invoice: Identifiable {
     public var notes: String?
     public var termsAndConditions: String?
     public var tags: [String] = []
-    
-    @Relationship(deleteRule: .cascade) public var items: [InvoiceItem]
-    @Relationship(deleteRule: .cascade) public var payments: [InvoicePayment]
-    
-    public var status: InvoiceStatus {
-        get { InvoiceStatus(rawValue: statusRaw) ?? .draft }
-        set { statusRaw = newValue.rawValue }
-    }
-    
+
+    public var items: [InvoiceItem] = []
+    public var payments: [InvoicePayment] = []
+
     public var isOverdue: Bool {
         return status != .paid && status != .void && status != .archived && status != .cancelled && dueDate < Date()
     }
-    
+
     public var customerInitials: String {
         let components = customerName.components(separatedBy: " ")
         if components.count >= 2, let first = components.first?.first, let last = components.last?.first {
@@ -304,19 +295,19 @@ public final class Invoice: Identifiable {
         }
         return String(customerName.prefix(2)).uppercased()
     }
-    
+
     public var formattedTotal: String {
         return CommonCurrencyFormatter.format(totalAmount, currencyCode: currency)
     }
-    
+
     public var formattedBalanceDue: String {
         return CommonCurrencyFormatter.format(balanceDue, currencyCode: currency)
     }
-    
+
     public var formattedIssueDate: String {
         return CommonDateFormatter.formatShort(issueDate)
     }
-    
+
     public var formattedDueDate: String {
         return CommonDateFormatter.formatShort(dueDate)
     }
@@ -343,7 +334,9 @@ public final class Invoice: Identifiable {
         notes: String? = nil,
         termsAndConditions: String? = nil,
         totalAmount: Double = 0.0,
-        balanceDue: Double = 0.0
+        balanceDue: Double = 0.0,
+        items: [InvoiceItem] = [],
+        payments: [InvoicePayment] = []
     ) {
         self.invoiceId = invoiceId
         self.customerName = customerName
@@ -354,7 +347,7 @@ public final class Invoice: Identifiable {
         self.shippingAddress = shippingAddress
         self.issueDate = issueDate
         self.dueDate = dueDate
-        self.statusRaw = status.rawValue
+        self.status = status
         self.currency = currency
         self.companyName = companyName
         self.paymentTerms = paymentTerms
@@ -372,11 +365,11 @@ public final class Invoice: Identifiable {
         self.totalAmount = totalAmount
         self.paidAmount = max(0, totalAmount - balanceDue)
         self.balanceDue = balanceDue
-        self.items = []
-        self.payments = []
+        self.items = items
+        self.payments = payments
     }
-    
-    func recalculateTotals() {
+
+    public mutating func recalculateTotals() {
         let sub = items.reduce(0) { $0 + $1.taxableAmount }
         let tax = items.reduce(0) { $0 + $1.taxAmount }
         self.subtotalAmount = sub
@@ -387,10 +380,3 @@ public final class Invoice: Identifiable {
         self.balanceDue = max(0, totalAmount - paid)
     }
 }
-
-// MARK: - Server Response DTO
-
-public struct InvoiceListResponse: Codable {
-    public let message: String?
-}
-

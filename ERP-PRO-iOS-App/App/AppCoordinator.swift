@@ -118,6 +118,8 @@ public struct AppCoordinatorView: View {
             switch dest {
             case .invoices:
                 InvoiceListView()
+            case .orders:
+                SalesOrderListView()
             default:
                 TabPlaceholderView(title: dest.title, description: "\(dest.title) module & management")
             }
